@@ -1,18 +1,30 @@
 import { GameRoutesEnum } from "@/constants/global/enum";
+import { ImageBackground } from "expo-image";
 import { Link } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function MainScreen() {
+    const backgroundImage = require("@/assets/images/mainScreen/badFisherLogo3.jpg");
+    const logoImage = require("@/assets/images/mainScreen/logo.png");
     return (
         <SafeAreaView style={MainScreenStyles.mainContainer}>
-            <Text>Main Screen</Text>
-            <TouchableOpacity style={MainScreenStyles.navigateButton}>
-                <Link href={GameRoutesEnum.GAME} >
-                    <Text>Go to Game</Text>
-                </Link>
-            </TouchableOpacity>
+            <ImageBackground
+                contentFit="cover"
+                source={backgroundImage}
+                style={MainScreenStyles.backgroundImage}>
+                <Image source={logoImage} style={MainScreenStyles.logoImage} />
+                <View style={MainScreenStyles.subContainer}>
+                    <Text style={MainScreenStyles.textTitle}>Main Screen</Text>
+                    <TouchableOpacity style={MainScreenStyles.navigateButton}>
+                        <Link href={GameRoutesEnum.GAME} >
+                            <Text>Go to Game</Text>
+                        </Link>
+                    </TouchableOpacity>
+                </View>
+
+            </ImageBackground>
         </SafeAreaView>
     )
 }
@@ -20,8 +32,10 @@ export default function MainScreen() {
 const MainScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+    },
+    textTitle: {
+        fontSize: 24,
+        fontWeight: "bold",
     },
     navigateButton: {
         backgroundColor: "aqua",
@@ -30,5 +44,26 @@ const MainScreenStyles = StyleSheet.create({
         alignItems: "center",
         borderRadius: 5,
         marginTop: 20,
+    },
+    subContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        padding: 20,
+        borderRadius: 10,
+    },
+    backgroundImage: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+    },
+    logoImage: {
+        width: 600,
+        height: 300,
+        position: "absolute",
+        top: 10,
+        resizeMode: "contain",
     },
 })
