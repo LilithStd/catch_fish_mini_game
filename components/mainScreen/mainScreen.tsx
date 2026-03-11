@@ -3,6 +3,7 @@ import { ImageBackground } from "expo-image";
 import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import LanguageSwitcher from "../global/languageSwitcher";
 
 
 export default function MainScreen() {
@@ -19,9 +20,12 @@ export default function MainScreen() {
                     <Text style={MainScreenStyles.textTitle}>Main Screen</Text>
                     <TouchableOpacity style={MainScreenStyles.navigateButton}>
                         <Link href={GameRoutesEnum.GAME} >
-                            <Text>Go to Game</Text>
+                            <Text style={MainScreenStyles.navigationButtonText}>Go to Game</Text>
                         </Link>
                     </TouchableOpacity>
+                </View>
+                <View style={{ position: "absolute", bottom: 20, alignSelf: "center" }}>
+                    <LanguageSwitcher />
                 </View>
 
             </ImageBackground>
@@ -38,12 +42,16 @@ const MainScreenStyles = StyleSheet.create({
         fontWeight: "bold",
     },
     navigateButton: {
-        backgroundColor: "aqua",
+        backgroundColor: "blue",
         padding: 10,
         width: '50%',
         alignItems: "center",
         borderRadius: 5,
         marginTop: 20,
+    },
+    navigationButtonText: {
+        color: "white",
+        fontSize: 16,
     },
     subContainer: {
         justifyContent: "center",
