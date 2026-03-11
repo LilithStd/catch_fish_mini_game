@@ -1,18 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import MainScreen from "@/components/mainScreen/mainScreen";
+import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
-    <View style={GlobalStyles.container}>
-
-      <Text>Edit app/index.tsx to edit this screen2.</Text>
-    </View>
+    <SafeAreaView style={GlobalStyles.container}>
+      <MainScreen />
+    </SafeAreaView>
   );
 }
 
 const GlobalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
