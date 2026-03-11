@@ -1,6 +1,7 @@
 import { LanguageEnum } from '@/constants/global/enum'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface GlobalStoreInterface {
   currentLanguage: LanguageEnum
@@ -17,6 +18,9 @@ export const useGlobalStore = create<GlobalStoreInterface>()(
         }
       },
     }),
-    { name: 'global-storage' }, // localStorage key
+    {
+      name: "global-storage",
+      storage: createJSONStorage(() => AsyncStorage),
+    }
   ),
 )

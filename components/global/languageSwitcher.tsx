@@ -1,15 +1,20 @@
 import { LanguageEnum } from "@/constants/global/enum";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useGlobalStore } from "@/store/global/globalStore";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LanguagesList = [LanguageEnum.EN, LanguageEnum.LV, LanguageEnum.RU]
 
 export default function LanguageSwitcher() {
+
+    const setCurrentLanguage = useGlobalStore((state) => state.setCurrentLanguage)
+    const currentLanguage = useGlobalStore((state) => state.currentLanguage)
+
     const renderLanguageItem = ({ item }: { item: LanguageEnum }) => {
         return (
-            <View style={LanguageSwitcherStyles.languageItem}>
+            <TouchableOpacity style={[LanguageSwitcherStyles.languageItem, currentLanguage === item && LanguageSwitcherStyles.selectedLanguageItem]} onPress={() => setCurrentLanguage(item)}>
                 <Text>{item}</Text>
-            </View>
+            </TouchableOpacity>
         )
     }
     return (
@@ -53,5 +58,8 @@ const LanguageSwitcherStyles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 5,
         marginHorizontal: 5,
+    },
+    selectedLanguageItem: {
+        backgroundColor: "blue",
     },
 })
