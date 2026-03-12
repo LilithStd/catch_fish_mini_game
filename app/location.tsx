@@ -32,7 +32,7 @@ export default function Location() {
         return (
 
             <View style={LocationStyles.locationItem}>
-                <ImageBackground source={item.previewImage} imageStyle={{
+                <ImageBackground blurRadius={open ? 2 : 0} source={item.previewImage} imageStyle={{
                     borderRadius: 20,
                 }} resizeMode="cover" style={LocationStyles.imageBackground}>
                     <TouchableOpacity onPress={() => {
