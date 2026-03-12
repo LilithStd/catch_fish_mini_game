@@ -19,7 +19,7 @@ export default function MainScreen() {
                 <View style={MainScreenStyles.subContainer}>
                     <Text style={MainScreenStyles.textTitle}>Main Screen</Text>
                     <TouchableOpacity style={MainScreenStyles.navigateButton}>
-                        <Link href={GameRoutesEnum.GAME} >
+                        <Link href={GameRoutesEnum.LOCATION} >
                             <Text style={MainScreenStyles.navigationButtonText}>Go to Game</Text>
                         </Link>
                     </TouchableOpacity>
