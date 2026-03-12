@@ -3,13 +3,17 @@ import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useState } from "react";
 import {
-    FlatList, ImageBackground, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View
+    FlatList,
+    ImageBackground, LayoutAnimation, Pressable, StyleSheet, Text,
+    View
 } from "react-native";
-
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const buttonImage = require("@/assets/images/button/orange_button_01(small).png")
 
 
 export default function Location() {
+
     // state
     const [openId, setOpenId] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
@@ -24,7 +28,7 @@ export default function Location() {
     };
     const renderLocationItem = ({ item }: { item: LocationsItemsType }) => {
         const AdditionalDescription = () => {
-            return <View>
+            return <View style={LocationStyles.additionalDescriptionContainer}>
                 <Text>{item.description}</Text>
                 <Text>{item.listFishTypes.join(", ")}</Text>
             </View>
@@ -35,19 +39,26 @@ export default function Location() {
                 <ImageBackground blurRadius={open ? 2 : 0} source={item.previewImage} imageStyle={{
                     borderRadius: 20,
                 }} resizeMode="cover" style={LocationStyles.imageBackground}>
-                    <TouchableOpacity onPress={() => {
+                    <Pressable onPress={() => {
                         toggle();
                         setOpenId(item.id);
                         setCurrentLocation(item.name)
                     }}>
                         <View style={LocationStyles.locationTitleContainer}>
                             <Text style={LocationStyles.locationTitle}>{item.name}</Text>
-                        </View>
-                        {open && openId === item.id && (
-                            <AdditionalDescription />
+                            {open && openId === item.id && (
+                                <AdditionalDescription />
 
-                        )}
-                    </TouchableOpacity>
+                            )}
+                            {/* <Button title="Choose" onPress={() => setCurrentLocation(item.name)} /> */}
+                            <ImageBackground source={buttonImage} style={LocationStyles.buttonImage} resizeMode="contain">
+                                <Text style={{ color: "white", fontWeight: "bold", textAlign: "center" }}>Choose</Text>
+                            </ImageBackground>
+
+
+                        </View>
+
+                    </Pressable>
                 </ImageBackground>
             </View>
 
@@ -77,7 +88,6 @@ const LocationStyles = StyleSheet.create({
     subContainer: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
         padding: 20,
         borderRadius: 10,
     },
@@ -87,6 +97,16 @@ const LocationStyles = StyleSheet.create({
         borderRadius: 50,
         padding: 30,
     },
+    additionalDescriptionContainer: {
+
+        borderRadius: 10,
+    },
+    buttonImage: {
+        width: 182,
+        height: 47,
+        justifyContent: "center",
+        alignItems: "center",
+    },
     locationTitle: {
         fontFamily: 'mainFont',
         fontSize: 54,
@@ -94,6 +114,8 @@ const LocationStyles = StyleSheet.create({
     },
     locationTitleContainer: {
         backgroundColor: "rgba(255, 255, 255, 0.8)",
+        padding: 10,
+        borderRadius: 10,
     },
     locationContainer: {
         justifyContent: "center",
