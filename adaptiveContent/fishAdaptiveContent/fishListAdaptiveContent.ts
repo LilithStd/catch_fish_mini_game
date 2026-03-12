@@ -1,3 +1,10 @@
+export type fishListAdaptiveContentType = {
+    id: string,
+    name: string,
+    type: string,
+    image: number
+}
+
 export const typesOfFish = {
     en:{
         predator: "Predator",
@@ -15,6 +22,7 @@ export const typesOfFish = {
         omnivorous: "Всеядный",
     }
 }
+
 
 export const fishListAdaptiveContent = {
     en:{

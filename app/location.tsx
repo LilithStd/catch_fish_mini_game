@@ -1,9 +1,9 @@
-import { locationAdaptiveContent } from "@/adaptiveContent/locationContent/locationAdaptiveContent";
+import { locationAdaptiveContent, LocationsItemsType } from "@/adaptiveContent/locationContent/locationAdaptiveContent";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useState } from "react";
 import {
-    FlatList, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View
+    FlatList, ImageBackground, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View
 } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Location() {
     // state
-    const [openId, setOpenId] = useState(null);
+    const [openId, setOpenId] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
     // global state
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
@@ -22,18 +22,30 @@ export default function Location() {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setOpen(!open);
     };
-    const renderLocationItem = ({ item }: { item: any }) => {
-        return (
-            <View style={LocationStyles.locationItem}>
-                <TouchableOpacity onPress={() => {
-                    toggle();
-                    setOpenId(item.id);
-                    setCurrentLocation(item.name)
-                }}>
-                    <Text>{item.name}</Text>
-                    {open && openId === item.id && <Text>{item.description}</Text>}
-                </TouchableOpacity>
+    const renderLocationItem = ({ item }: { item: LocationsItemsType }) => {
+        console.log(item)
+        const AdditionalDescription = () => {
+            return <View>
+                <Text>{item.description}</Text>
+                <Text>{item.listFishTypes.join(", ")}</Text>
             </View>
+        }
+        return (
+            <ImageBackground source={item.previewImage} style={LocationStyles.locationItem}>
+                <View style={LocationStyles.locationItem}>
+                    <TouchableOpacity onPress={() => {
+                        toggle();
+                        setOpenId(item.id);
+                        setCurrentLocation(item.name)
+                    }}>
+                        <Text>{item.name}</Text>
+                        {open && openId === item.id && (
+                            <AdditionalDescription />
+
+                        )}
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
         )
     }
     return (
