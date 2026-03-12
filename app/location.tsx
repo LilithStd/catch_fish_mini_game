@@ -23,7 +23,6 @@ export default function Location() {
         setOpen(!open);
     };
     const renderLocationItem = ({ item }: { item: LocationsItemsType }) => {
-        console.log(item)
         const AdditionalDescription = () => {
             return <View>
                 <Text>{item.description}</Text>
@@ -31,21 +30,27 @@ export default function Location() {
             </View>
         }
         return (
-            <ImageBackground source={item.previewImage} style={LocationStyles.locationItem}>
-                <View style={LocationStyles.locationItem}>
+
+            <View style={LocationStyles.locationItem}>
+                <ImageBackground source={item.previewImage} imageStyle={{
+                    borderRadius: 20,
+                }} resizeMode="cover" style={LocationStyles.imageBackground}>
                     <TouchableOpacity onPress={() => {
                         toggle();
                         setOpenId(item.id);
                         setCurrentLocation(item.name)
                     }}>
-                        <Text>{item.name}</Text>
+                        <View style={LocationStyles.locationTitleContainer}>
+                            <Text style={LocationStyles.locationTitle}>{item.name}</Text>
+                        </View>
                         {open && openId === item.id && (
                             <AdditionalDescription />
 
                         )}
                     </TouchableOpacity>
-                </View>
-            </ImageBackground>
+                </ImageBackground>
+            </View>
+
         )
     }
     return (
@@ -76,6 +81,20 @@ const LocationStyles = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
     },
+    imageBackground: {
+        flex: 1,
+        justifyContent: 'center',
+        borderRadius: 50,
+        padding: 30,
+    },
+    locationTitle: {
+        fontFamily: 'mainFont',
+        fontSize: 54,
+        color: 'green'
+    },
+    locationTitleContainer: {
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+    },
     locationContainer: {
         justifyContent: "center",
         alignItems: "center",
@@ -89,7 +108,7 @@ const LocationStyles = StyleSheet.create({
         padding: 10,
     },
     locationItem: {
-        padding: 10,
+        // padding: 10,
         width: '100%',
         flex: 1,
         backgroundColor: "lightgray",

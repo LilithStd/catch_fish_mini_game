@@ -1,7 +1,14 @@
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
+  const [loaded] = useFonts({
+    mainFont: require('../assets/fonts/RubikDirt-Regular.ttf'),
+  });
+  if (!loaded) {
+    return null;
+  }
   return (
     <SafeAreaProvider>
       <Stack>
