@@ -7,6 +7,7 @@ export const locationAdaptiveContent = {
             {
                 id: 'lake',
                 name: "Lake",
+                description:'Small lake in forest',
                 listAvaliblePlaces: [
                     {
                         id: 'lakePlace1',
@@ -38,6 +39,7 @@ export const locationAdaptiveContent = {
             {
                 id: 'lake',
                 name: "Ezers",
+                description:'Mazs ezers mežā',
                 listAvaliblePlaces: [
                     {
                         id: 'lakePlace1',
@@ -68,6 +70,7 @@ export const locationAdaptiveContent = {
             {
                 id: 'lake',
                 name: "Озеро",
+                description:'Небольшое озеро в лесу',
                 listAvaliblePlaces: [
                     {
                         id: 'lakePlace1',
