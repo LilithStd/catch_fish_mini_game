@@ -5,10 +5,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LanguageSwitcher from "../global/languageSwitcher";
 
+const backgroundImage = require("@/assets/images/mainScreen/badFisherLogo3.jpg");
+const logoImage = require("@/assets/images/mainScreen/logo.png");
+const buttonImage = require("@/assets/images/button/orange_button_01(small).png")
 
 export default function MainScreen() {
-    const backgroundImage = require("@/assets/images/mainScreen/badFisherLogo3.jpg");
-    const logoImage = require("@/assets/images/mainScreen/logo.png");
+
     return (
         <SafeAreaView style={MainScreenStyles.mainContainer}>
             <ImageBackground
@@ -17,12 +19,14 @@ export default function MainScreen() {
                 style={MainScreenStyles.backgroundImage}>
                 <Image source={logoImage} style={MainScreenStyles.logoImage} />
                 <View style={MainScreenStyles.subContainer}>
-                    <Text style={MainScreenStyles.textTitle}>Main Screen</Text>
-                    <TouchableOpacity style={MainScreenStyles.navigateButton}>
-                        <Link href={GameRoutesEnum.LOCATION} >
-                            <Text style={MainScreenStyles.navigationButtonText}>Go to Game</Text>
-                        </Link>
-                    </TouchableOpacity>
+                    {/* <Text style={MainScreenStyles.textTitle}>Main Screen</Text> */}
+                    <ImageBackground source={buttonImage} style={MainScreenStyles.buttonImage}>
+                        <TouchableOpacity style={MainScreenStyles.navigateButton}>
+                            <Link href={GameRoutesEnum.LOCATION} style={MainScreenStyles.buttonImageContainer}>
+                                <Text style={MainScreenStyles.navigationButtonText}>GO TO FISHING!</Text>
+                            </Link>
+                        </TouchableOpacity>
+                    </ImageBackground>
                 </View>
                 <View style={{ position: "absolute", bottom: 20, alignSelf: "center" }}>
                     <LanguageSwitcher />
@@ -39,18 +43,22 @@ const MainScreenStyles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 24,
+        fontFamily: "mainFont",
         fontWeight: "bold",
     },
     navigateButton: {
-        backgroundColor: "blue",
-        padding: 10,
-        width: '50%',
-        alignItems: "center",
-        borderRadius: 5,
-        marginTop: 20,
+        // backgroundColor: "blue",
+        // padding: 10,
+        // width: '50%',
+        // alignItems: "center",
+        // justifyContent: "center",
+        // borderRadius: 5,
+        // marginTop: 20,
     },
     navigationButtonText: {
-        color: "white",
+        // color: "white",
+        // fontFamily: "",
+        fontWeight: "bold",
         fontSize: 16,
     },
     subContainer: {
@@ -72,6 +80,18 @@ const MainScreenStyles = StyleSheet.create({
         height: 300,
         position: "absolute",
         top: 10,
+        resizeMode: "contain",
+    },
+    buttonImageContainer: {
+        // justifyContent: "center",
+        // alignItems: "center",
+    },
+    buttonImage: {
+        width: 182,
+        height: 47,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         resizeMode: "contain",
     },
 })

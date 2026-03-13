@@ -5,6 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 export default function RootLayout() {
   const [loaded] = useFonts({
     mainFont: require('../assets/fonts/RubikDirt-Regular.ttf'),
+    cartoonLargeFont: require('../assets/fonts/BungeeSpice-Regular.ttf'),
   });
   if (!loaded) {
     return null;
