@@ -7,6 +7,7 @@ export enum LanguageEnum {
 export enum GameRoutesEnum {
     MAIN = "/",
     GAME = "/game",
+    ENCYCLOPEDIA = "/encyclopedia",
     LOCATION = "/location",
     RESULT = "/result",
 }

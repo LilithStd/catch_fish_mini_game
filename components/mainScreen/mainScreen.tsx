@@ -27,6 +27,13 @@ export default function MainScreen() {
                             </Link>
                         </TouchableOpacity>
                     </ImageBackground>
+                    <ImageBackground source={buttonImage} style={MainScreenStyles.buttonImage}>
+                        <TouchableOpacity style={MainScreenStyles.navigateButton}>
+                            <Link href={GameRoutesEnum.ENCYCLOPEDIA} style={MainScreenStyles.buttonImageContainer}>
+                                <Text style={MainScreenStyles.navigationButtonText}>ENCYCLOPEDIA</Text>
+                            </Link>
+                        </TouchableOpacity>
+                    </ImageBackground>
                 </View>
                 <View style={{ position: "absolute", bottom: 20, alignSelf: "center" }}>
                     <LanguageSwitcher />
@@ -62,7 +69,10 @@ const MainScreenStyles = StyleSheet.create({
         fontSize: 16,
     },
     subContainer: {
+        display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
+        gap: 10,
         alignItems: "center",
         backgroundColor: "rgba(255, 255, 255, 0.8)",
         padding: 20,
