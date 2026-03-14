@@ -1,3 +1,5 @@
+import { LanguageEnum } from "@/constants/global/enum";
+
 export const languageSwitcherContent = {
     
         languageSwitcherTitle:{
@@ -7,15 +9,15 @@ export const languageSwitcherContent = {
         } ,
         languageSwitcherList: [
             {
-                id: 'en',
+                id: LanguageEnum.EN,
                 name: "EN",
             },
             {
-                id: 'lv',
+                id: LanguageEnum.LV,
                 name: "LV",
             },
             {
-                id: 'ru',
+                id: LanguageEnum.RU,
                 name: "RU",
             },
         ]
