@@ -4,6 +4,7 @@ export type LocationsItemsType = {
         description: string,
         listFishTypes: string[],
         previewImage: number,
+        imageLocation: number,
         listAvaliblePlaces: {
             id: string,
             name: string,
