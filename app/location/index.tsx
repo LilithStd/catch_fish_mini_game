@@ -1,6 +1,9 @@
+
 import { locationAdaptiveContent, LocationsItemsType } from "@/adaptiveContent/locationContent/locationAdaptiveContent";
+import { GameRoutesEnum } from "@/constants/global/enum";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
+import { Link } from "expo-router";
 import { useState } from "react";
 import {
     FlatList,
@@ -56,7 +59,12 @@ export default function Location() {
                             )}
                             {/* <Button title="Choose" onPress={() => setCurrentLocation(item.name)} /> */}
                             <ImageBackground source={buttonImage} style={LocationStyles.buttonImage} resizeMode="contain">
-                                <Text style={{ color: "white", fontWeight: "bold", textAlign: "center" }}>Choose</Text>
+                                <Pressable onPress={() => redirectToLocation(item.name)}>
+                                    <Link href={`${GameRoutesEnum.LOCATION}/${item.id}`}>
+                                        <Text style={{ color: "white", fontWeight: "bold", textAlign: "center" }}>Choose</Text>
+                                    </Link>
+
+                                </Pressable>
                             </ImageBackground>
 
 
