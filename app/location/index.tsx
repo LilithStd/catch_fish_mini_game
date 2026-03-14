@@ -26,6 +26,10 @@ export default function Location() {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setOpen(!open);
     };
+    const redirectToLocation = (locationName: string) => {
+        setCurrentLocation(locationName)
+
+    }
     const renderLocationItem = ({ item }: { item: LocationsItemsType }) => {
         const AdditionalDescription = () => {
             return <View style={LocationStyles.additionalDescriptionContainer}>
