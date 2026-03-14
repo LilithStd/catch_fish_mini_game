@@ -60,6 +60,6 @@ const LanguageSwitcherStyles = StyleSheet.create({
         marginHorizontal: 5,
     },
     selectedLanguageItem: {
-        backgroundColor: "blue",
+        backgroundColor: "orange",
     },
 })

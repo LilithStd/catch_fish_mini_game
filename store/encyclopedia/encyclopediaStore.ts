@@ -4,7 +4,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface EncyclopediaStoreInterface {
-    encyclopediaData:string[]:
+    encyclopediaData:string[]
   getResponseInformation: (language: LanguageEnum) => void
 }
 
