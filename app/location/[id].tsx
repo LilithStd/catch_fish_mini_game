@@ -14,10 +14,10 @@ export default function SelectedLocation() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getCurrentLocationData = useLocationStore((state) => state.getCurrentLocationData)
     const locationData = getCurrentLocationData(locationId, currentLanguage)
-    // console.log("locationData", locationData)
+
     return (
         <SafeAreaView>
-            <ImageBackground source={locationData.imageLocation} style={{ width: "100%", height: 200 }}>
+            <ImageBackground source={locationData.imageLocation} style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }} resizeMode="cover">
                 <Text style={{ color: "white", fontSize: 24, fontWeight: "bold", textShadowColor: "rgba(0, 0, 0, 0.75)", textShadowOffset: { width: -1, height: 1 }, textShadowRadius: 10 }}>{locationData.name}</Text>
             </ImageBackground>
             <Text>Selected Location: {locationData.name}</Text>
