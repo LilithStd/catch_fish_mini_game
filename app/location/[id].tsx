@@ -10,7 +10,6 @@ export default function SelectedLocation() {
     const { id } = useLocalSearchParams();
     return (
         <SafeAreaView>
-
             <Text>Selected Location: {id}</Text>
         </SafeAreaView>
     )

@@ -1,35 +1,8 @@
-import { fishListAdaptiveContent } from "../fishAdaptiveContent/fishListAdaptiveContent";
-
-export type LocationsItemsType = {
-        id: string,
-        name: string,
-        description: string,
-        listFishTypes: string[],
-        previewImage: number,
-        listAvaliblePlaces: {
-            id: string,
-            name: string,
-            listFish: {
-                id: string,
-                name: string,
-                type: string,
-                image: number
-            }[]
-        }[]
-    }
-
-export type LocationAdaptiveContentElementType = {
-    mainTitle: string,
-    locationsList: LocationsItemsType[]
-}
+import { LocationAdaptiveContentType } from "@/constants/types/locationDataTypes"
+import { fishListAdaptiveContent } from "../fishAdaptiveContent/fishListAdaptiveContent"
 
 
 
-export type LocationAdaptiveContentType = {
-    en: LocationAdaptiveContentElementType,
-    lv: LocationAdaptiveContentElementType,
-    ru: LocationAdaptiveContentElementType,
-}
 
 
 export const locationAdaptiveContent: LocationAdaptiveContentType = {

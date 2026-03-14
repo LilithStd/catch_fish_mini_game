@@ -1,6 +1,7 @@
 
-import { locationAdaptiveContent, LocationsItemsType } from "@/adaptiveContent/locationContent/locationAdaptiveContent";
+import { locationAdaptiveContent } from "@/adaptiveContent/locationContent/locationAdaptiveContent";
 import { GameRoutesEnum } from "@/constants/global/enum";
+import { LocationsItemsType } from "@/constants/types/locationDataTypes";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { Link } from "expo-router";

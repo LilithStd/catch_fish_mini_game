@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface LocationStoreInterface {
   currentLocation: string
-  locationData: string
+  locationData: ''
   setCurrentLocation: (location: string) => void
   getCurrentLocationData: (id: string) => string
 }
