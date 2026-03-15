@@ -77,6 +77,11 @@ export default function SelectedLocation() {
     return (
         <SafeAreaView>
             <ImageBackground source={locationData.imageLocation} style={SelectedLocationStyles.ImageBackground} resizeMode="cover">
+                <View style={SelectedLocationStyles.textContainer}>
+                    <Text style={{ color: "white" }}>Selected Location: {locationData.name}</Text>
+                    <Text style={{ color: "white", fontSize: 24, fontWeight: "bold", textShadowColor: "rgba(0, 0, 0, 0.75)", textShadowOffset: { width: -1, height: 1 }, textShadowRadius: 10 }}>{locationData.name}</Text>
+                </View>
+
                 {locationData.listAvaliblePlaces.map((place) => (
                     <MapPinSolidIcon onPress={() => mapPinsHandler(place.coordinates.x, place.coordinates.y, place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon, { left: place.coordinates.x, top: place.coordinates.y }]} />
                 ))}
@@ -85,9 +90,8 @@ export default function SelectedLocation() {
                         return <InformationPopup key={place.id} x={place.coordinates.x} y={place.coordinates.y} />
                     }
                 })}
-                <Text style={{ color: "white", fontSize: 24, fontWeight: "bold", textShadowColor: "rgba(0, 0, 0, 0.75)", textShadowOffset: { width: -1, height: 1 }, textShadowRadius: 10 }}>{locationData.name}</Text>
+
             </ImageBackground>
-            <Text>Selected Location: {locationData.name}</Text>
         </SafeAreaView>
     )
 }
@@ -100,6 +104,16 @@ export const SelectedLocationStyles = StyleSheet.create({
         position: "relative",
         justifyContent: "center",
         alignItems: "center"
+    },
+    textContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        position: "absolute",
+        top: 20,
+        padding: 20,
+        borderRadius: 10,
+        marginBottom: 20,
     },
     mapPinIcon: {
         position: "absolute",
