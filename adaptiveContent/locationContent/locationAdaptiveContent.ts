@@ -20,6 +20,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                     {
                         id: 'lakePlace1',
                         name: "Place 1",
+                        coordinates: {
+                            x:50,
+                            y:380
+                        },
                         listFish:[
                             fishListAdaptiveContent.en.pike,
                             fishListAdaptiveContent.en.perch,
@@ -29,11 +33,40 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                     {
                         id: 'lakePlace2',
                         name: "Place 2",
+                        coordinates: {
+                            x:50,
+                            y:200
+                        },
                         listFish:[
                             fishListAdaptiveContent.en.roach,
                             fishListAdaptiveContent.en.carp,
                             fishListAdaptiveContent.en.bream,
                             fishListAdaptiveContent.en.perch,
+                        ]
+                    },
+                    {
+                        id: 'lakePlace3',
+                        name: "Place 3",
+                        coordinates: {
+                            x:340,
+                            y:690
+                        },
+                        listFish:[
+                            fishListAdaptiveContent.en.roach,
+                            fishListAdaptiveContent.en.perch,
+                        ]
+                    },
+                    {
+                        id: 'lakePlace4',
+                        name: "Place 4",
+                        coordinates:{
+                            x:360,
+                            y:280
+                        },
+                        listFish:[
+                            fishListAdaptiveContent.en.roach,
+                            fishListAdaptiveContent.en.carp,
+                            fishListAdaptiveContent.en.bream,
                         ]
                     },
                 ]
@@ -55,6 +88,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                     {
                         id: 'lakePlace1',
                         name: "Vieta 1",
+                        coordinates: {
+                            x:50,
+                            y:380
+                        },
                         listFish:[
                             fishListAdaptiveContent.lv.pike,
                             fishListAdaptiveContent.lv.perch,
@@ -64,11 +101,40 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                     {
                         id: 'lakePlace2',
                         name: "Vieta 2",
+                        coordinates: {
+                            x:50,
+                            y:200
+                        },
                         listFish:[
                             fishListAdaptiveContent.lv.roach,
                             fishListAdaptiveContent.lv.carp,
                             fishListAdaptiveContent.lv.bream,
                             fishListAdaptiveContent.lv.perch,
+                        ]
+                    },
+                    {
+                        id: 'lakePlace3',
+                        name: "Vieta 3",
+                        coordinates: {
+                            x:340,
+                            y:690
+                        },
+                        listFish:[
+                            fishListAdaptiveContent.lv.roach,
+                            fishListAdaptiveContent.lv.perch,
+                        ]
+                    },
+                    {
+                        id: 'lakePlace4',
+                        name: "Vieta 4",
+                        coordinates:{
+                            x:360,
+                            y:280
+                        },
+                        listFish:[
+                            fishListAdaptiveContent.lv.roach,
+                            fishListAdaptiveContent.lv.carp,
+                            fishListAdaptiveContent.lv.bream,
                         ]
                     },
                 ]
@@ -89,6 +155,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                     {
                         id: 'lakePlace1',
                         name: "Место 1",
+                        coordinates: {
+                            x:50,
+                            y:380
+                        },
                         listFish:[
                             fishListAdaptiveContent.ru.pike,
                             fishListAdaptiveContent.ru.perch,
@@ -98,6 +168,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                     {
                         id: 'lakePlace2',
                         name: "Место 2",
+                        coordinates: {
+                            x:50,
+                            y:200
+                        },
                         listFish:[
                             fishListAdaptiveContent.ru.roach,
                             fishListAdaptiveContent.ru.carp,
@@ -105,6 +179,31 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             fishListAdaptiveContent.ru.perch,
                         ]
                     },
+                    {
+                        id: 'lakePlace3',
+                        name: "Место 3",
+                        coordinates: {
+                            x:340,
+                            y:690
+                        },
+                        listFish:[
+                            fishListAdaptiveContent.ru.roach,
+                            fishListAdaptiveContent.ru.perch,
+                        ]
+                    },
+                    {
+                        id: 'lakePlace4',
+                        name: "Место 4",
+                        coordinates:{
+                            x:360,
+                            y:280
+                        },
+                        listFish:[
+                            fishListAdaptiveContent.ru.roach,
+                            fishListAdaptiveContent.ru.carp,
+                            fishListAdaptiveContent.ru.bream,
+                        ]
+                    }
                 ]
             }
         ]

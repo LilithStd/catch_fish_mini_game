@@ -8,6 +8,10 @@ export type LocationsItemsType = {
         listAvaliblePlaces: {
             id: string,
             name: string,
+            coordinates: {
+                x: number,
+                y: number
+            },
             listFish: {
                 id: string,
                 name: string,
