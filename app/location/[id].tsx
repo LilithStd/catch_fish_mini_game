@@ -18,15 +18,44 @@ export default function SelectedLocation() {
     const locationData = getCurrentLocationData(locationId, currentLanguage)
     // state
     const [selectedMapPin, setSelectedMapPin] = useState<string | null>(null)
+    const [isCheckedMapPinInformationPopUp, setIsCheckedMapPinInformationPopUp] = useState(false)
     // functions
     const mapPinsHandler = (x: number, y: number, mapPinId: string) => {
         if (selectedMapPin === mapPinId) {
             setSelectedMapPin(null)
+            setIsCheckedMapPinInformationPopUp(false)
             informationPopUpHandler(x, y)
         } else {
             setSelectedMapPin(mapPinId)
+            setIsCheckedMapPinInformationPopUp(true)
             informationPopUpHandler(x, y)
         }
+    }
+    const InformationPopup = ({ x, y }: { x: number, y: number }) => {
+
+        const place = locationData.listAvaliblePlaces.find(
+            p => p.coordinates.x === x && p.coordinates.y === y
+        )
+
+        if (!place) return null
+
+        return (
+            <View
+                style={{
+                    position: "absolute",
+                    top: y + 10,
+                    left: x + 10,
+                    backgroundColor: "rgba(0,0,0,0.8)",
+                    padding: 10,
+                    borderRadius: 10
+                }}
+            >
+                <Text style={{ color: "white" }}>{place.name}</Text>
+                <Text style={{ color: "white" }}>
+                    {place.listFish.map(f => f.name).join(", ")}
+                </Text>
+            </View>
+        )
     }
     const informationPopUpHandler = (x: number, y: number) => {
         return (
@@ -51,6 +80,11 @@ export default function SelectedLocation() {
                 {locationData.listAvaliblePlaces.map((place) => (
                     <MapPinSolidIcon onPress={() => mapPinsHandler(place.coordinates.x, place.coordinates.y, place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon, { left: place.coordinates.x, top: place.coordinates.y }]} />
                 ))}
+                {isCheckedMapPinInformationPopUp && locationData.listAvaliblePlaces.map((place) => {
+                    if (place.id === selectedMapPin) {
+                        return <InformationPopup key={place.id} x={place.coordinates.x} y={place.coordinates.y} />
+                    }
+                })}
                 <Text style={{ color: "white", fontSize: 24, fontWeight: "bold", textShadowColor: "rgba(0, 0, 0, 0.75)", textShadowOffset: { width: -1, height: 1 }, textShadowRadius: 10 }}>{locationData.name}</Text>
             </ImageBackground>
             <Text>Selected Location: {locationData.name}</Text>
