@@ -3,7 +3,7 @@ import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { ImageBackground, StyleSheet, Text } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 // interface SelectedLocationProps {
 //     id: string
@@ -19,18 +19,37 @@ export default function SelectedLocation() {
     // state
     const [selectedMapPin, setSelectedMapPin] = useState<string | null>(null)
     // functions
-    const mapPinsHandler = (mapPinId: string) => {
+    const mapPinsHandler = (x: number, y: number, mapPinId: string) => {
         if (selectedMapPin === mapPinId) {
             setSelectedMapPin(null)
+            informationPopUpHandler(x, y)
         } else {
             setSelectedMapPin(mapPinId)
+            informationPopUpHandler(x, y)
         }
+    }
+    const informationPopUpHandler = (x: number, y: number) => {
+        return (
+            <View>
+                <Text style={{ color: "white" }}>Information about place</Text>
+                {locationData.listAvaliblePlaces.map(place => {
+                    if (place.coordinates.x === x && place.coordinates.y === y) {
+                        return (
+                            <View key={place.id}>
+                                <Text style={{ color: "white" }}>{place.name}</Text>
+                                <Text style={{ color: "white" }}>{place.listFish.map(fish => fish.name).join(", ")}</Text>
+                            </View>
+                        )
+                    }
+                })}
+            </View>
+        )
     }
     return (
         <SafeAreaView>
             <ImageBackground source={locationData.imageLocation} style={SelectedLocationStyles.ImageBackground} resizeMode="cover">
                 {locationData.listAvaliblePlaces.map((place) => (
-                    <MapPinSolidIcon onPress={() => mapPinsHandler(place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon, { left: place.coordinates.x, top: place.coordinates.y }]} />
+                    <MapPinSolidIcon onPress={() => mapPinsHandler(place.coordinates.x, place.coordinates.y, place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon, { left: place.coordinates.x, top: place.coordinates.y }]} />
                 ))}
                 <Text style={{ color: "white", fontSize: 24, fontWeight: "bold", textShadowColor: "rgba(0, 0, 0, 0.75)", textShadowOffset: { width: -1, height: 1 }, textShadowRadius: 10 }}>{locationData.name}</Text>
             </ImageBackground>
