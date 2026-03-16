@@ -5,7 +5,15 @@ export type LocationsItemsType = {
         listFishTypes: string[],
         previewImage: number,
         imageLocation: number,
-        listAvaliblePlaces: {
+        listAvaliblePlaces: PlaceAdaptiveContentType[]
+    }
+
+export type LocationAdaptiveContentElementType = {
+    mainTitle: string,
+    locationsList: LocationsItemsType[]
+}
+
+export type PlaceAdaptiveContentType = {
             id: string,
             name: string,
             imagePlace: number,
@@ -19,12 +27,6 @@ export type LocationsItemsType = {
                 type: string,
                 image: number
             }[]
-        }[]
-    }
-
-export type LocationAdaptiveContentElementType = {
-    mainTitle: string,
-    locationsList: LocationsItemsType[]
 }
 
 
