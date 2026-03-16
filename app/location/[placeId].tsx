@@ -1,7 +1,7 @@
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 
 export default function Place() {
@@ -11,6 +11,8 @@ export default function Place() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getCurrentLocationData = useLocationStore((state) => state.getCurrentLocationData)
     return (
-        <View>index</View>
+        <View>
+            <Text>{locationId}</Text>
+        </View>
     )
 }

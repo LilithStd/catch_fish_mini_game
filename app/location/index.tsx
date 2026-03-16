@@ -150,4 +150,3 @@ const LocationStyles = StyleSheet.create({
         borderRadius: 20,
     },
 });
-
