@@ -34,13 +34,25 @@ export default function Location() {
         setCurrentLocation(locationName)
 
     }
-    const renderLocationItem = ({ item }: { item: LocationsItemsType }) => {
+
+
+    // components
+    const redirectToPlaceButton = (placeId: string) => {
+        return (
+            <Pressable>
+                <Link href={`${GameRoutesEnum.LOCATION}/${placeId}`}>
+                    <Text style={{ color: "white", fontWeight: "bold", textAlign: "center" }}>Go to place</Text>
+                </Link>
+            </Pressable>
+        )
+    }
+    function renderLocationItem({ item }: { item: LocationsItemsType; }) {
         const AdditionalDescription = () => {
             return <View style={LocationStyles.additionalDescriptionContainer}>
                 <Text>{item.description}</Text>
                 <Text>{item.listFishTypes.join(", ")}</Text>
-            </View>
-        }
+            </View>;
+        };
         return (
 
             <View style={LocationStyles.locationItem}>
@@ -50,7 +62,7 @@ export default function Location() {
                     <Pressable onPress={() => {
                         toggle();
                         setOpenId(item.id);
-                        setCurrentLocation(item.name)
+                        setCurrentLocation(item.name);
                     }}>
                         <View style={LocationStyles.locationTitleContainer}>
                             <Text style={LocationStyles.locationTitle}>{item.name}</Text>
@@ -75,8 +87,9 @@ export default function Location() {
                 </ImageBackground>
             </View>
 
-        )
+        );
     }
+
     return (
         <SafeAreaView style={LocationStyles.container}>
             <Text>{locationAdaptiveContent[currentLanguage].mainTitle}</Text>
