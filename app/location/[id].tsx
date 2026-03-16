@@ -83,7 +83,19 @@ export default function SelectedLocation() {
                 </View>
 
                 {locationData.listAvaliblePlaces.map((place) => (
-                    <MapPinSolidIcon onPress={() => mapPinsHandler(place.coordinates.x, place.coordinates.y, place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon, { left: place.coordinates.x, top: place.coordinates.y }]} />
+                    <View
+                        key={place.id}
+                        style={{
+                            position: "absolute",
+                            left: place.coordinates.x,
+                            top: place.coordinates.y,
+                            // left: `${place.coordinates.x}%`,
+                            // top: `${place.coordinates.y}%`
+                        }}
+                    >
+                        <MapPinSolidIcon onPress={() => mapPinsHandler(place.coordinates.x, place.coordinates.y, place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon,]} />
+                    </View>
+
                 ))}
                 {isCheckedMapPinInformationPopUp && locationData.listAvaliblePlaces.map((place) => {
                     if (place.id === selectedMapPin) {
