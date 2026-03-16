@@ -3,7 +3,7 @@ import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 // interface SelectedLocationProps {
 //     id: string
@@ -19,16 +19,30 @@ export default function SelectedLocation() {
     // state
     const [selectedMapPin, setSelectedMapPin] = useState<string | null>(null)
     const [isCheckedMapPinInformationPopUp, setIsCheckedMapPinInformationPopUp] = useState(false)
+    // constants
+    const popUpWidth = 160;
+    const edgePadding = 10;
+    // 
+    const { width } = useWindowDimensions();
     // functions
+    const getPopupLeft = (x: number) => {
+
+        const centered = x - popUpWidth / 2;
+
+        const min = edgePadding;
+        const max = width - popUpWidth - edgePadding;
+
+        return Math.min(Math.max(centered, min), max);
+    };
     const mapPinsHandler = (x: number, y: number, mapPinId: string) => {
         if (selectedMapPin === mapPinId) {
             setSelectedMapPin(null)
             setIsCheckedMapPinInformationPopUp(false)
-            informationPopUpHandler(x, y)
+            // informationPopUpHandler(x, y)
         } else {
             setSelectedMapPin(mapPinId)
             setIsCheckedMapPinInformationPopUp(true)
-            informationPopUpHandler(x, y)
+            // informationPopUpHandler(x, y)
         }
     }
     const InformationPopup = ({ x, y }: { x: number, y: number }) => {
@@ -44,7 +58,7 @@ export default function SelectedLocation() {
                 style={{
                     position: "absolute",
                     top: y + 10,
-                    left: x + 10,
+                    left: getPopupLeft(x),
                     backgroundColor: "rgba(0,0,0,0.8)",
                     padding: 10,
                     borderRadius: 10
@@ -57,23 +71,23 @@ export default function SelectedLocation() {
             </View>
         )
     }
-    const informationPopUpHandler = (x: number, y: number) => {
-        return (
-            <View>
-                <Text style={{ color: "white" }}>Information about place</Text>
-                {locationData.listAvaliblePlaces.map(place => {
-                    if (place.coordinates.x === x && place.coordinates.y === y) {
-                        return (
-                            <View key={place.id}>
-                                <Text style={{ color: "white" }}>{place.name}</Text>
-                                <Text style={{ color: "white" }}>{place.listFish.map(fish => fish.name).join(", ")}</Text>
-                            </View>
-                        )
-                    }
-                })}
-            </View>
-        )
-    }
+    // const informationPopUpHandler = (x: number, y: number) => {
+    //     return (
+    //         <View>
+    //             <Text style={{ color: "white" }}>Information about place</Text>
+    //             {locationData.listAvaliblePlaces.map(place => {
+    //                 if (place.coordinates.x === x && place.coordinates.y === y) {
+    //                     return (
+    //                         <View key={place.id}>
+    //                             <Text style={{ color: "white" }}>{place.name}</Text>
+    //                             <Text style={{ color: "white" }}>{place.listFish.map(fish => fish.name).join(", ")}</Text>
+    //                         </View>
+    //                     )
+    //                 }
+    //             })}
+    //         </View>
+    //     )
+    // }
     return (
         <SafeAreaView>
             <ImageBackground source={locationData.imageLocation} style={SelectedLocationStyles.ImageBackground} resizeMode="cover">
