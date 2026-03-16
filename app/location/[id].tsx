@@ -22,17 +22,24 @@ export default function SelectedLocation() {
     // constants
     const popUpWidth = 160;
     const edgePadding = 10;
-    // 
+    const pinOffset = 12;
+
     const { width } = useWindowDimensions();
     // functions
     const getPopupLeft = (x: number) => {
 
-        const centered = x - popUpWidth / 2;
+        const rightSide = x + pinOffset;
+        const leftSide = x - popUpWidth - pinOffset;
 
-        const min = edgePadding;
         const max = width - popUpWidth - edgePadding;
 
-        return Math.min(Math.max(centered, min), max);
+        // если справа помещается — используем правую сторону
+        if (rightSide <= max) {
+            return rightSide;
+        }
+
+        // иначе показываем слева
+        return Math.max(leftSide, edgePadding);
     };
     const mapPinsHandler = (x: number, y: number, mapPinId: string) => {
         if (selectedMapPin === mapPinId) {
@@ -59,12 +66,16 @@ export default function SelectedLocation() {
                     position: "absolute",
                     top: y + 10,
                     left: getPopupLeft(x),
+
+                    width: popUpWidth,
+
                     backgroundColor: "rgba(0,0,0,0.8)",
                     padding: 10,
                     borderRadius: 10
                 }}
             >
                 <Text style={{ color: "white" }}>{place.name}</Text>
+
                 <Text style={{ color: "white" }}>
                     {place.listFish.map(f => f.name).join(", ")}
                 </Text>
@@ -103,8 +114,6 @@ export default function SelectedLocation() {
                             position: "absolute",
                             left: place.coordinates.x,
                             top: place.coordinates.y,
-                            // left: `${place.coordinates.x}%`,
-                            // top: `${place.coordinates.y}%`
                         }}
                     >
                         <MapPinSolidIcon onPress={() => mapPinsHandler(place.coordinates.x, place.coordinates.y, place.id)} key={place.id} width={50} height={50} fill={selectedMapPin === place.id ? 'red' : 'white'} style={[SelectedLocationStyles.mapPinIcon,]} />
