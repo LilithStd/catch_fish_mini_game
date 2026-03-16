@@ -16,12 +16,13 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="game" options={{ headerShown: false }} />
         <Stack.Screen name="encyclopedia" options={{ headerShown: false }} />
+
         <Stack.Screen name="location/index" options={{ headerShown: false }} />
         <Stack.Screen name="location/[id]" options={{ headerShown: false }} />
-        <Stack.Screen name="location/[placeId]" options={{ headerShown: false }} />
+        <Stack.Screen name="location/[id]/[placeId]" options={{ headerShown: false }} />
+
         <Stack.Screen name="result" options={{ headerShown: false }} />
       </Stack>
-
     </SafeAreaProvider>
   );
 }

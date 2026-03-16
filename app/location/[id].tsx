@@ -1,9 +1,10 @@
 import MapPinSolidIcon from "@/assets/icons/MapPinSolid.svg";
+import { GameRoutesEnum } from "@/constants/global/enum";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { ImageBackground, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { ImageBackground, Pressable, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 // interface SelectedLocationProps {
 //     id: string
@@ -79,6 +80,18 @@ export default function SelectedLocation() {
                 <Text style={{ color: "white" }}>
                     {place.listFish.map(f => f.name).join(", ")}
                 </Text>
+                <View>
+                    <Pressable style={{
+                        backgroundColor: "blue",
+                        padding: 10,
+                        borderRadius: 5,
+                        marginTop: 10,
+                    }}>
+                        <Link href={`${GameRoutesEnum.LOCATION}/${locationId}/${place.id}`}>
+                            <Text style={{ color: "white", fontWeight: "bold", textAlign: "center" }}>Go to place</Text>
+                        </Link>
+                    </Pressable>
+                </View>
             </View>
         )
     }
