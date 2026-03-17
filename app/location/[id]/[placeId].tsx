@@ -5,7 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { FlatList, Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+const StartButtonImage = require("@/assets/images/ui/floatItem.png");
 
 export default function Place() {
     const { id, placeId } = useLocalSearchParams();
@@ -64,6 +64,13 @@ export default function Place() {
                         />
                     )}
                 </View>
+                <Pressable style={{ position: "absolute", bottom: 200, left: 200 }}>
+                    <View style={{ backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100 }}>
+                        <Image source={StartButtonImage} style={PlaceStyles.image} />
+                    </View>
+
+                </Pressable>
+
             </ImageBackground>
         </SafeAreaView>
     )
@@ -117,7 +124,7 @@ const PlaceStyles = StyleSheet.create({
         alignItems: "center",
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
     }
 })
