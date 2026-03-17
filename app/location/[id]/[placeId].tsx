@@ -1,8 +1,9 @@
+import { fishListAdaptiveContentType } from "@/constants/types/fishDataTypes";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -35,6 +36,15 @@ export default function Place() {
             </View>
         )
     }
+    const fishListRenderItem = ({ item }: { item: fishListAdaptiveContentType }) => {
+        return (
+            <View style={{ padding: 10 }}>
+                <Image source={item.image} style={[PlaceStyles.image, { width: 40, height: 40 }]} />
+                <Text>Name: {item.name}</Text>
+                <Text>Type: {item.type}</Text>
+            </View>
+        )
+    }
     return (
         <SafeAreaView style={PlaceStyles.mainContainer}>
             <ImageBackground source={placeData.imagePlace} resizeMode="cover" style={PlaceStyles.imageBackground}>
@@ -50,7 +60,7 @@ export default function Place() {
                         <FlatList
                             data={placeData.listFish}
                             keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => <Text>{item.name}</Text>}
+                            renderItem={fishListRenderItem}
                         />
                     )}
                 </View>
