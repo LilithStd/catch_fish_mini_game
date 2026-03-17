@@ -1,7 +1,8 @@
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
-import { ImageBackground, StyleSheet, Text } from "react-native";
+import { useState } from "react";
+import { FlatList, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -13,23 +14,79 @@ export default function Place() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getCurrentPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
     const placeData = getCurrentPlaceData(placeIdValue, currentLanguage)
-
+    // state
+    const [openElementId, setOpenElementId] = useState<string | null>(null)
+    // 
+    // components
+    const toggleElement = (elementId: string) => {
+        if (openElementId === elementId) {
+            setOpenElementId(null)
+        } else {
+            setOpenElementId(elementId)
+        }
+    }
+    const collapsedDescription = (elements: [], id: string) => {
+        return (
+            <View style={PlaceStyles.subContainer}>
+                <Text>{id}</Text>
+                <Pressable onPress={() => toggleElement("description")} style={{ marginTop: 10 }}>
+                    <Text>Show More</Text>
+                </Pressable>
+            </View>
+        )
+    }
     return (
-        <SafeAreaView>
+        <SafeAreaView style={PlaceStyles.mainContainer}>
             <ImageBackground source={placeData.imagePlace} resizeMode="cover" style={PlaceStyles.imageBackground}>
-                <Text>{locationId}</Text>
-                <Text>{placeIdValue}</Text>
+                <View style={PlaceStyles.descriptionContainer}>
+                    <Text style={PlaceStyles.titleText}>Location:{locationId}</Text>
+                    <Text style={PlaceStyles.titleText}>Place:{placeIdValue}</Text>
+                </View>
+                <View>
+                    <Text>List Fish:</Text>
+                    <FlatList
+                        data={placeData.listFish}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => <Text>{item.name}</Text>}
+                    />
+                </View>
             </ImageBackground>
-
-
         </SafeAreaView>
     )
 }
 
 const PlaceStyles = StyleSheet.create({
-    mainContainer: {},
+    mainContainer: {
+        flex: 1
+    },
+    descriptionContainer: {
+        position: "absolute",
+        top: 20,
+        width: "90%",
+        alignSelf: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        padding: 10,
+        borderRadius: 10,
+        margin: 20,
+    },
+    fishListContainer: {},
+    titleText: {
+        fontSize: 24,
+        fontFamily: 'cartoonLargeFont',
+    },
+    subContainer: {
+        position: "absolute",
+        top: 20,
+        alignSelf: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        padding: 10,
+        borderRadius: 10,
+        margin: 20,
+    },
     imageBackground: {
-        // flex: 1,
+        flex: 1,
+        display: "flex",
+        position: "relative",
         width: "100%",
         height: "100%",
         justifyContent: "center",
