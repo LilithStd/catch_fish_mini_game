@@ -1,7 +1,8 @@
+import { GameRoutesEnum } from "@/constants/global/enum";
 import { fishListAdaptiveContentType } from "@/constants/types/fishDataTypes";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { FlatList, Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -66,7 +67,9 @@ export default function Place() {
                 </View>
                 <Pressable style={{ position: "absolute", bottom: 200, left: 200 }}>
                     <View style={{ backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100 }}>
-                        <Image source={StartButtonImage} style={PlaceStyles.image} />
+                        <Link href={`${GameRoutesEnum.GAME}/${placeIdValue}`}>
+                            <Image source={StartButtonImage} style={PlaceStyles.image} />
+                        </Link>
                     </View>
 
                 </Pressable>

@@ -14,7 +14,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="game" options={{ headerShown: false }} />
+        <Stack.Screen name="game/[game]" options={{ headerShown: false }} />
         <Stack.Screen name="encyclopedia" options={{ headerShown: false }} />
 
         <Stack.Screen name="location/index" options={{ headerShown: false }} />
