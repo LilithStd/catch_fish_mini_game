@@ -42,13 +42,17 @@ export default function Place() {
                     <Text style={PlaceStyles.titleText}>Location:{locationId}</Text>
                     <Text style={PlaceStyles.titleText}>Place:{placeIdValue}</Text>
                 </View>
-                <View>
-                    <Text>List Fish:</Text>
-                    <FlatList
-                        data={placeData.listFish}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => <Text>{item.name}</Text>}
-                    />
+                <View style={PlaceStyles.fishListContainer}>
+                    <Pressable onPress={() => toggleElement("fishList")}>
+                        <Text style={PlaceStyles.titleText}>Fish List</Text>
+                    </Pressable>
+                    {openElementId === "fishList" && (
+                        <FlatList
+                            data={placeData.listFish}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({ item }) => <Text>{item.name}</Text>}
+                        />
+                    )}
                 </View>
             </ImageBackground>
         </SafeAreaView>
@@ -69,7 +73,17 @@ const PlaceStyles = StyleSheet.create({
         borderRadius: 10,
         margin: 20,
     },
-    fishListContainer: {},
+    fishListContainer: {
+        position: "absolute",
+        top: 200,
+        left: 0,
+        width: "40%",
+        alignSelf: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        padding: 10,
+        borderRadius: 10,
+        margin: 20,
+    },
     titleText: {
         fontSize: 24,
         fontFamily: 'cartoonLargeFont',
