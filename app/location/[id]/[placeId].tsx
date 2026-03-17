@@ -1,7 +1,7 @@
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
-import { ImageBackground, Text } from "react-native";
+import { ImageBackground, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -13,11 +13,10 @@ export default function Place() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getCurrentPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
     const placeData = getCurrentPlaceData(placeIdValue, currentLanguage)
-    const image = require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg')
-    console.log(placeData)
+
     return (
         <SafeAreaView>
-            <ImageBackground source={placeData.imagePlace ? placeData.imagePlace : image} resizeMode="cover">
+            <ImageBackground source={placeData.imagePlace} resizeMode="cover" style={PlaceStyles.imageBackground}>
                 <Text>{locationId}</Text>
                 <Text>{placeIdValue}</Text>
             </ImageBackground>
@@ -26,3 +25,18 @@ export default function Place() {
         </SafeAreaView>
     )
 }
+
+const PlaceStyles = StyleSheet.create({
+    mainContainer: {},
+    imageBackground: {
+        // flex: 1,
+        width: "100%",
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    image: {
+        width: 200,
+        height: 200,
+    }
+})

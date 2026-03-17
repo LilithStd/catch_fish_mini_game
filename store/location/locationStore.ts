@@ -26,12 +26,16 @@ export const useLocationStore = create<LocationStoreInterface>()(
       },
       getCurrentPlaceData: (id, locale) => {
         const locationList = get().locationData[locale].locationsList
-        // console.log(id)
-        // console.log(locationList.map((location) => location.listAvaliblePlaces.find(place => place.id === id)))
-        // const location = locationList.map((location) => location.listAvaliblePlaces)
-        const place = locationList.map((location) => location.listAvaliblePlaces.find(place => place.id === id))
-        
-        return place as unknown as PlaceAdaptiveContentType
+
+        const place = locationList
+          .flatMap(location => location.listAvaliblePlaces)
+          .find(place => place.id === id)
+
+        if (!place) {
+          throw new Error("Place not found")
+        }
+
+        return place
       },
       getCurrentLocationData: (id, locale) => {
         const locationList = get().locationData[locale].locationsList
