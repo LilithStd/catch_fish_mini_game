@@ -40,7 +40,7 @@ export default function Place() {
     const fishListRenderItem = ({ item }: { item: fishListAdaptiveContentType }) => {
         return (
             <View style={{ padding: 10 }}>
-                <Image source={item.image} style={[PlaceStyles.image, { width: 40, height: 40 }]} />
+                <Image source={item.preview} style={[PlaceStyles.image, { width: 100, height: 40 }]} />
                 <Text>Name: {item.name}</Text>
                 <Text>Type: {item.type}</Text>
             </View>

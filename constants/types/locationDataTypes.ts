@@ -26,6 +26,7 @@ export type PlaceAdaptiveContentType = {
                 name: string,
                 type: string,
                 image: number
+                preview: number
             }[]
 }
 

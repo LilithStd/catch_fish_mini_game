@@ -3,4 +3,5 @@ export type fishListAdaptiveContentType = {
     name: string,
     type: string,
     image: number
+    preview: number
 }
