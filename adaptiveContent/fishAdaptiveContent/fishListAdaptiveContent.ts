@@ -34,18 +34,18 @@ const fishImages = {
     //     image: require("@/assets/images/fish/Salmon.jpg"),
     //     preview: require("@/assets/images/fish/salmonWithoutBGPreview.png")
     // },
-    // roach: {
-    //     image: require("@/assets/images/fish/Roach.jpg"),
-    //     preview: require("@/assets/images/fish/roachWithoutBGPreview.png")
-    // },
-    // carp: {
-    //     image: require("@/assets/images/fish/Carp.jpg"),
-    //     preview: require("@/assets/images/fish/carpWithoutBGPreview.png")
-    // },
-    // trout: {
-    //     image: require("@/assets/images/fish/Trout.jpg"),
-    //     preview: require("@/assets/images/fish/troutWithoutBGPreview.png")
-    // },
+    roach: {
+        image: require("@/assets/images/fish/Roach.jpg"),
+        preview: require("@/assets/images/fish/roachWithoutBGPreview.png")
+    },
+    carp: {
+        image: require("@/assets/images/fish/Carp.jpg"),
+        preview: require("@/assets/images/fish/carpWithoutBGPreview.png")
+    },
+    trout: {
+        image: require("@/assets/images/fish/Trout.jpg"),
+        preview: require("@/assets/images/fish/troutWithoutBGPreview.png")
+    },
     // bream: {
     //     image: require("@/assets/images/fish/Bream.jpg"),
     //     preview: require("@/assets/images/fish/breamWithoutBGPreview.png")
@@ -89,22 +89,22 @@ export const fishListAdaptiveContent = {
             id: 'roach',
             name: "Roach",
             type: typesOfFish.en.omnivorous,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.roach.image,
+            preview: fishImages.roach.preview
         },
         carp: { 
             id: 'carp',
             name: "Carp",
             type: typesOfFish.en.nonPredator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.carp.image,
+            preview: fishImages.carp.preview
         },
         trout: { 
             id: 'trout',
             name: "Trout",
             type: typesOfFish.en.omnivorous,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.trout.image,
+            preview: fishImages.trout.preview
         },
         bream: { 
             id: 'bream',
@@ -147,22 +147,22 @@ export const fishListAdaptiveContent = {
             id: 'roach',
             name: "Reņģe",
             type: typesOfFish.lv.omnivorous,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.roach.image,
+            preview: fishImages.roach.preview
         },
         carp: {
             id: 'carp',
             name: "Karpa",
             type: typesOfFish.lv.nonPredator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.carp.image,
+            preview: fishImages.carp.preview
         },
         trout: {
             id: 'trout',
             name: "Forele",
             type: typesOfFish.lv.omnivorous,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.trout.image,
+            preview: fishImages.trout.preview
         },
         bream: {
             id: 'bream',
@@ -205,22 +205,22 @@ export const fishListAdaptiveContent = {
             id: 'roach',
             name: "Плотва",
             type: typesOfFish.ru.omnivorous,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.roach.image,
+            preview: fishImages.roach.preview
         },
         carp: {
             id: 'carp',
             name: "Карп",
             type: typesOfFish.ru.nonPredator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.carp.image,
+            preview: fishImages.carp.preview
         },
         trout: {
             id: 'trout',
             name: "Форель",
             type: typesOfFish.ru.omnivorous,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.trout.image,
+            preview: fishImages.trout.preview
 
         },
         bream: {
