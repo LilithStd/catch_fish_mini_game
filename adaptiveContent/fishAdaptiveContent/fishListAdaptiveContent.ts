@@ -26,14 +26,14 @@ const fishImages = {
         image: require("@/assets/images/fish/Perch.jpg"),
         preview: require("@/assets/images/fish/perchWithoutBGPreview.png")
     },
-    // pikeperch: {
-    //     image: require("@/assets/images/fish/Pikeperch.jpg"),
-    //     preview: require("@/assets/images/fish/pikeperchWithoutBGPreview.png")
-    // },
-    // salmon: {
-    //     image: require("@/assets/images/fish/Salmon.jpg"),
-    //     preview: require("@/assets/images/fish/salmonWithoutBGPreview.png")
-    // },
+    pikeperch: {
+        image: require("@/assets/images/fish/Pikeperch.jpg"),
+        preview: require("@/assets/images/fish/pikePerchWithoutBGPreview.png")
+    },
+    salmon: {
+        image: require("@/assets/images/fish/Salmon.jpg"),
+        preview: require("@/assets/images/fish/salmonWithoutBGPreview.png")
+    },
     roach: {
         image: require("@/assets/images/fish/Roach.jpg"),
         preview: require("@/assets/images/fish/roachWithoutBGPreview.png")
@@ -46,10 +46,10 @@ const fishImages = {
         image: require("@/assets/images/fish/Trout.jpg"),
         preview: require("@/assets/images/fish/troutWithoutBGPreview.png")
     },
-    // bream: {
-    //     image: require("@/assets/images/fish/Bream.jpg"),
-    //     preview: require("@/assets/images/fish/breamWithoutBGPreview.png")
-    // },
+    bream: {
+        image: require("@/assets/images/fish/Bream.jpg"),
+        preview: require("@/assets/images/fish/breamWithoutBGPreview.png")
+    },
 }
 
 
@@ -110,8 +110,8 @@ export const fishListAdaptiveContent = {
             id: 'bream',
             name: "Bream",
             type: typesOfFish.en.nonPredator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.bream.image,
+            preview: fishImages.bream.preview
         },
     },
     lv:{
@@ -133,15 +133,15 @@ export const fishListAdaptiveContent = {
             id: 'pikeperch',
             name: "Salatis",
             type: typesOfFish.lv.predator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.pikeperch.image,
+            preview: fishImages.pikeperch.preview
         },
         salmon: {
             id: 'salmon',
             name: "Lasis",
             type: typesOfFish.lv.predator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.salmon.image,
+            preview: fishImages.salmon.preview
         },
         roach: {
             id: 'roach',
@@ -168,8 +168,8 @@ export const fishListAdaptiveContent = {
             id: 'bream',
             name: "Plaudis",
             type: typesOfFish.lv.nonPredator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.bream.image,
+            preview: fishImages.bream.preview
         },
     },
     ru:{
@@ -191,15 +191,15 @@ export const fishListAdaptiveContent = {
             id: 'pikeperch',
             name: "Судак",
             type: typesOfFish.ru.predator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.pikeperch.image,
+            preview: fishImages.pikeperch.preview
         },
         salmon: {
             id: 'salmon',
             name: "Лосось",
             type: typesOfFish.ru.predator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.salmon.image,
+            preview: fishImages.salmon.preview
         },
         roach: {
             id: 'roach',
@@ -227,8 +227,8 @@ export const fishListAdaptiveContent = {
             id: 'bream',
             name: "Лещ",
             type: typesOfFish.ru.nonPredator,
-            image: fishImages.pike.image,
-            preview: fishImages.pike.preview
+            image: fishImages.bream.image,
+            preview: fishImages.bream.preview
         },
     }
 }
