@@ -24,12 +24,15 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:50,
                             y:380
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.en.pike,
                             fishListAdaptiveContent.en.perch,
                             fishListAdaptiveContent.en.pikeperch,
-                        ]
+                        ],
                     },
                     {
                         id: 'lakePlace2',
@@ -38,7 +41,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:50,
                             y:200
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_top_left.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_top_left.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.en.roach,
                             fishListAdaptiveContent.en.carp,
@@ -53,7 +59,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:340,
                             y:690
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_bottom_right.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_bottom_right.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.en.roach,
                             fishListAdaptiveContent.en.perch,
@@ -66,7 +75,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:360,
                             y:280
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_top_right.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_top_right.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.en.roach,
                             fishListAdaptiveContent.en.carp,
@@ -96,7 +108,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:50,
                             y:380
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.lv.pike,
                             fishListAdaptiveContent.lv.perch,
@@ -110,8 +125,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:50,
                             y:200
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_top_left.jpg'),
-
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_top_left.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.lv.roach,
                             fishListAdaptiveContent.lv.carp,
@@ -126,8 +143,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:340,
                             y:690
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_bottom_right.jpg'),
-
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_bottom_right.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.lv.roach,
                             fishListAdaptiveContent.lv.perch,
@@ -140,8 +159,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:360,
                             y:280
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_top_right.jpg'),
-
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_top_right.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.lv.roach,
                             fishListAdaptiveContent.lv.carp,
@@ -170,7 +191,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:50,
                             y:380
                         },
-                         imagePlace: require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg'),
+                         images: {
+                             place: require('@/assets/images/locations/full/lake/places/lake_bottom_left.jpg'),
+                             game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                         },
                         listFish:[
                             fishListAdaptiveContent.ru.pike,
                             fishListAdaptiveContent.ru.perch,
@@ -186,7 +210,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:50,
                             y:200
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_top_left.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_top_left.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.ru.roach,
                             fishListAdaptiveContent.ru.carp,
@@ -201,7 +228,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:340,
                             y:690
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_bottom_right.jpg'),
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_bottom_right.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.ru.roach,
                             fishListAdaptiveContent.ru.perch,
@@ -214,8 +244,10 @@ export const locationAdaptiveContent: LocationAdaptiveContentType = {
                             x:360,
                             y:280
                         },
-                        imagePlace: require('@/assets/images/locations/full/lake/places/lake_top_right.jpg'),
-
+                        images: {
+                            place: require('@/assets/images/locations/full/lake/places/lake_top_right.jpg'),
+                            game: require('@/assets/images/locations/full/lake/game/lake_game.png')
+                        },
                         listFish:[
                             fishListAdaptiveContent.ru.roach,
                             fishListAdaptiveContent.ru.carp,

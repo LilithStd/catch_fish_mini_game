@@ -16,7 +16,11 @@ export type LocationAdaptiveContentElementType = {
 export type PlaceAdaptiveContentType = {
             id: string,
             name: string,
-            imagePlace: number,
+            images:{
+                place: number,
+                game: number
+            },
+            
             coordinates: {
                 x: number,
                 y: number

@@ -48,7 +48,7 @@ export default function Place() {
     }
     return (
         <SafeAreaView style={PlaceStyles.mainContainer}>
-            <ImageBackground source={placeData.imagePlace} resizeMode="cover" style={PlaceStyles.imageBackground}>
+            <ImageBackground source={placeData.images.place} resizeMode="cover" style={PlaceStyles.imageBackground}>
                 <View style={PlaceStyles.descriptionContainer}>
                     <Text style={PlaceStyles.titleText}>Location:{locationId}</Text>
                     <Text style={PlaceStyles.titleText}>Place:{placeIdValue}</Text>
