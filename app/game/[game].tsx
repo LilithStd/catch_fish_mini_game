@@ -34,6 +34,9 @@ export default function Game() {
         setGameStarted(false)
         console.log("Game stopped")
     }
+    const startCatching = () => {
+        setIsCatching(true)
+    }
     const anim = useRef(new Animated.Value(0)).current;
     // effects
     // catching animation
@@ -123,8 +126,11 @@ export default function Game() {
                     <Animated.View style={{ transform: [{ translateY: isCatching ? 20 : moveY },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
+                    <Pressable onPress={startCatching} style={{ position: "absolute", top: 100, left: 150, width: 100, height: 100, zIndex: 1000 }} >
+                        <Text>Catch!</Text>
+                    </Pressable>
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
-                    <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100 , zIndex: 1000}}>
+                    <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100, zIndex: 1000 }}>
                         <Text style={GameStyles.titleText}>Stop Catching</Text>
                     </Pressable>
                 </ImageBackground>
