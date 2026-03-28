@@ -3,7 +3,7 @@ import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Animated, Easing, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Animated, Easing, Image, ImageBackground, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const ImageStartGame = require("@/assets/images/ui/fishHook.png")
 const FloatItemImage = require("@/assets/images/ui/floatItemGame.png")
@@ -13,17 +13,67 @@ const GameImageFull2 = require("@/assets/images/locations/full/lake/game/origina
 export default function Game() {
     const { game } = useLocalSearchParams();
     const placeId = Array.isArray(game) ? game[0] : game;
+    // consts
+    const catchingDuration = 3000
+    const catchingAnimationAmplitude = 10
+
     // stores
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getLocationPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
     // state
     const [gameStarted, setGameStarted] = useState(false)
+    const [isCatching, setIsCatching] = useState(false)
     // functions
+
     const startGame = () => {
         setGameStarted(true)
     }
-    const anim = useRef(new Animated.Value(0)).current;
+    const stopCatching = () => {
 
+        setIsCatching(false)
+        setGameStarted(false)
+        console.log("Game stopped")
+    }
+    const anim = useRef(new Animated.Value(0)).current;
+    // effects
+    // catching animation
+    useEffect(() => {
+        if (!gameStarted) return;
+
+        let isMounted = true;
+
+        const loop = () => {
+            const randomDelay = Math.random() * 5000 + 2000;
+
+            setTimeout(() => {
+                if (!isMounted) return;
+
+                setIsCatching(true);
+
+                setTimeout(() => {
+                    setIsCatching(false);
+                    loop(); // 🔥 запускаем заново
+                }, catchingDuration);
+
+            }, randomDelay);
+        };
+
+        loop();
+        return () => {
+            isMounted = false;
+        };
+    }, [gameStarted]);
+    useEffect(() => {
+        if (!isCatching) return;
+
+        // поклёвка длится ограниченное время
+        const timeout = setTimeout(() => {
+            setIsCatching(false);
+        }, catchingDuration);
+
+        return () => clearTimeout(timeout);
+    }, [isCatching]);
+    // animation floatElement
     useEffect(() => {
         const animate = () => {
             Animated.sequence([
@@ -43,7 +93,7 @@ export default function Game() {
         };
 
         animate();
-    }, []);
+    }, [gameStarted]);
 
     const translateY = anim.interpolate({
         inputRange: [0, Math.PI, 2 * Math.PI],
@@ -55,6 +105,7 @@ export default function Game() {
         outputRange: [-10, 10],
     });
 
+    const biteY = isCatching ? 20 : moveY;
     // components
     const buttonStartGame = () => {
         return (
@@ -69,10 +120,13 @@ export default function Game() {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
-                    <Animated.View style={{ transform: [{ translateY: moveY },] }}>
+                    <Animated.View style={{ transform: [{ translateY: isCatching ? 20 : moveY },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
+                    <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100 , zIndex: 1000}}>
+                        <Text style={GameStyles.titleText}>Stop Catching</Text>
+                    </Pressable>
                 </ImageBackground>
             </View>
         )
