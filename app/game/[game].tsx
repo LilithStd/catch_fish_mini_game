@@ -5,6 +5,9 @@ import { useLocalSearchParams } from "expo-router";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const ImageStartGame = require("@/assets/images/ui/fishHook.png")
+const FloatItemImage = require("@/assets/images/ui/floatItem.png")
+const GameImageFull = require("@/assets/images/locations/full/lake/game/original_game_screen.png")
+const GameImageFull2 = require("@/assets/images/locations/full/lake/game/original_game_screen_half.png")
 
 export default function Game() {
     const { game } = useLocalSearchParams();
@@ -23,6 +26,14 @@ export default function Game() {
         )
     }
     // 
+    const gameComponent = () => {
+        return (
+            <View style={GameStyles.mainContainer}>
+                <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
+                </ImageBackground>
+            </View>
+        )
+    }
 
     return (
         <SafeAreaView style={GameStyles.mainContainer}>
