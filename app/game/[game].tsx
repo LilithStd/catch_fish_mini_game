@@ -3,7 +3,7 @@ import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Animated, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Animated, Easing, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const ImageStartGame = require("@/assets/images/ui/fishHook.png")
 const FloatItemImage = require("@/assets/images/ui/floatItemGame.png")
@@ -22,24 +22,39 @@ export default function Game() {
     const startGame = () => {
         setGameStarted(true)
     }
-    const translateY = useRef(new Animated.Value(0)).current;
+    const anim = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.loop(
+        const animate = () => {
             Animated.sequence([
-                Animated.timing(translateY, {
-                    toValue: -10, // вверх
-                    duration: 800,
+                Animated.timing(anim, {
+                    toValue: 1,
+                    duration: 1000,
+                    easing: Easing.inOut(Easing.sin),
                     useNativeDriver: true,
                 }),
-                Animated.timing(translateY, {
-                    toValue: 10, // вниз
-                    duration: 800,
+                Animated.timing(anim, {
+                    toValue: 0,
+                    duration: 1000,
+                    easing: Easing.inOut(Easing.sin),
                     useNativeDriver: true,
                 }),
-            ])
-        ).start();
+            ]).start(animate);
+        };
+
+        animate();
     }, []);
+
+    const translateY = anim.interpolate({
+        inputRange: [0, Math.PI, 2 * Math.PI],
+        outputRange: [-1, 1, -1], // 🔥 замкнутый цикл
+    });
+
+    const moveY = translateY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-10, 10],
+    });
+
     // components
     const buttonStartGame = () => {
         return (
@@ -54,7 +69,7 @@ export default function Game() {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
-                    <Animated.View style={{ transform: [{ translateY }] }}>
+                    <Animated.View style={{ transform: [{ translateY: moveY },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
@@ -128,7 +143,7 @@ const GameStyles = StyleSheet.create({
         width: 100,
         height: 100,
         position: 'absolute',
-        top: 290,
+        top: 310,
         left: 150
     },
     imageMask: {
