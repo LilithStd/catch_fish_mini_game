@@ -2,10 +2,11 @@
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const ImageStartGame = require("@/assets/images/ui/fishHook.png")
-const FloatItemImage = require("@/assets/images/ui/floatItem.png")
+const FloatItemImage = require("@/assets/images/ui/floatItemGame.png")
 const GameImageFull = require("@/assets/images/locations/full/lake/game/original_game_screen.png")
 const GameImageFull2 = require("@/assets/images/locations/full/lake/game/original_game_screen_half.png")
 
@@ -16,10 +17,15 @@ export default function Game() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getLocationPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
     // state
+    const [gameStarted, setGameStarted] = useState(false)
+    // functions
+    const startGame = () => {
+        setGameStarted(true)
+    }
     // components
     const buttonStartGame = () => {
         return (
-            <TouchableOpacity style={GameStyles.buttonStartGame}>
+            <TouchableOpacity style={GameStyles.buttonStartGame} onPress={startGame}>
                 <Text style={GameStyles.titleText}>Catch!</Text>
                 <ImageBackground source={ImageStartGame} style={GameStyles.buttonStartGameImage} />
             </TouchableOpacity>
@@ -30,6 +36,8 @@ export default function Game() {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
+                    <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
+                    <Image source={GameImageFull2} style={GameStyles.imageMask} />
                 </ImageBackground>
             </View>
         )
@@ -38,10 +46,11 @@ export default function Game() {
     return (
         <SafeAreaView style={GameStyles.mainContainer}>
             <ImageBackground source={getLocationPlaceData(placeId, currentLanguage).images.game} resizeMode="cover" style={GameStyles.imageBackground}>
+
                 <View style={GameStyles.titleContainer}>
                     <Text style={GameStyles.titleText}>{getLocationPlaceData(placeId, currentLanguage).name}</Text>
                 </View>
-                {buttonStartGame()}
+                {gameStarted ? gameComponent() : buttonStartGame()}
             </ImageBackground>
         </SafeAreaView>
     )
@@ -95,5 +104,21 @@ const GameStyles = StyleSheet.create({
         width: '80%',
         alignItems: 'center'
     },
+    floatItemImage: {
+        width: 100,
+        height: 100,
+        position: 'absolute',
+        top: 290,
+        left: 150
+    },
+    imageMask: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 10
+    }
 })
 
