@@ -2,8 +2,8 @@
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useLocationStore } from "@/store/location/locationStore";
 import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Animated, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const ImageStartGame = require("@/assets/images/ui/fishHook.png")
 const FloatItemImage = require("@/assets/images/ui/floatItemGame.png")
@@ -22,6 +22,24 @@ export default function Game() {
     const startGame = () => {
         setGameStarted(true)
     }
+    const translateY = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        Animated.loop(
+            Animated.sequence([
+                Animated.timing(translateY, {
+                    toValue: -10, // вверх
+                    duration: 800,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(translateY, {
+                    toValue: 10, // вниз
+                    duration: 800,
+                    useNativeDriver: true,
+                }),
+            ])
+        ).start();
+    }, []);
     // components
     const buttonStartGame = () => {
         return (
@@ -36,7 +54,9 @@ export default function Game() {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
-                    <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
+                    <Animated.View style={{ transform: [{ translateY }] }}>
+                        <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
+                    </Animated.View>
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
                 </ImageBackground>
             </View>
