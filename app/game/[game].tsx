@@ -65,7 +65,10 @@ export default function Game() {
     // effects
     // catching animation
     useEffect(() => {
-        if (!gameStarted || gameType === GAME_MODE_TYPE.STOPPED) return;
+        if (!gameStarted || gameType === GAME_MODE_TYPE.STOPPED) {
+            anim.stopAnimation();
+            return;
+        } 
         
         let isMounted = true;
 
@@ -78,8 +81,8 @@ export default function Game() {
                 setGameType(GAME_MODE_TYPE.CATCHING);
 
                 setTimeout(() => {
-                    setGameType(GAME_MODE_TYPE.FISHING);
-                    loop(); // 🔥 запускаем заново
+                    // setGameType(GAME_MODE_TYPE.STOPPED);
+                    loop(); // 
                 }, catchingDuration);
 
             }, randomDelay);
@@ -101,29 +104,48 @@ export default function Game() {
         return () => {
             clearTimeout(timeout);
         };
-    }, [gameType]);
+    }, [gameType, catchingDuration, failedCatching]);
 
     // animation floatElement
-    useEffect(() => {
-        const animate = () => {
-            Animated.sequence([
-                Animated.timing(anim, {
-                    toValue: 1,
-                    duration: 1000,
-                    easing: Easing.inOut(Easing.sin),
-                    useNativeDriver: true,
-                }),
-                Animated.timing(anim, {
-                    toValue: 0,
-                    duration: 1000,
-                    easing: Easing.inOut(Easing.sin),
-                    useNativeDriver: true,
-                }),
-            ]).start(animate);
-        };
+useEffect(() => {
 
-        animate();
-    }, [gameStarted]);
+  if (!gameStarted || gameType === GAME_MODE_TYPE.STOPPED) {
+    anim.stopAnimation();
+    anim.setValue(0);
+    return;
+  }
+
+  const loop = Animated.loop(
+    Animated.sequence([
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.inOut(Easing.sin),
+        useNativeDriver: true,
+      }),
+
+      Animated.timing(anim, {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.inOut(Easing.sin),
+        useNativeDriver: true,
+      }),
+
+    ])
+
+  );
+
+  loop.start();
+
+  return () => {
+
+    loop.stop();
+    anim.stopAnimation();
+    anim.setValue(0);
+
+  };
+
+}, [gameStarted, gameType]);
     useEffect(() => {
         if (gameType === GAME_MODE_TYPE.CATCHING) {
             Animated.timing(catchingAnim, {
