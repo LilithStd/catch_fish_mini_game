@@ -16,11 +16,17 @@ export default function Game() {
     // consts
     const catchingDuration = 3000
     const catchingAnimationAmplitude = 10
+    const enum GAME_MODE_TYPE {
+        CATCHING = "catching",
+        FISHING = "fishing",
+        CATCHING_FISH = "catching_fish"
+    }
 
     // stores
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getLocationPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
     // state
+    const [gameType, setGameType] = useState<GAME_MODE_TYPE>(GAME_MODE_TYPE.FISHING)
     const [gameStarted, setGameStarted] = useState(false)
     const [isCatchingStatus, setIsCatchingStatus] = useState(false)
     const [isCatching, setIsCatching] = useState(false)
@@ -38,8 +44,9 @@ export default function Game() {
         console.log("Game stopped")
     }
     const startCatching = () => {
-        setIsCatching(true)
-        setIsCatchingStatus(false)
+        setGameType(GAME_MODE_TYPE.CATCHING_FISH)
+        // setIsCatching(true)
+        // setIsCatchingStatus(false)
         console.log("Catching started")
     }
     const anim = useRef(new Animated.Value(0)).current;
@@ -48,7 +55,7 @@ export default function Game() {
     // catching animation
     useEffect(() => {
         if (!gameStarted) return;
-        if (isCatching) return;
+        if( gameType === GAME_MODE_TYPE.CATCHING) return;
         let isMounted = true;
 
         const loop = () => {
@@ -57,10 +64,10 @@ export default function Game() {
             setTimeout(() => {
                 if (!isMounted) return;
 
-                setIsCatchingStatus(true);
+                setGameType(GAME_MODE_TYPE.CATCHING);
 
                 setTimeout(() => {
-                    setIsCatchingStatus(false);
+                    setGameType(GAME_MODE_TYPE.FISHING);
                     loop(); // 🔥 запускаем заново
                 }, catchingDuration);
 
@@ -73,15 +80,15 @@ export default function Game() {
         };
     }, [gameStarted, isCatching]);
     useEffect(() => {
-        if (!isCatchingStatus) return;
+        if (gameType !== GAME_MODE_TYPE.CATCHING) return;
 
         // поклёвка длится ограниченное время
         const timeout = setTimeout(() => {
-            setIsCatchingStatus(false);
+            setGameType(GAME_MODE_TYPE.FISHING);
         }, catchingDuration);
 
         return () => clearTimeout(timeout);
-    }, [isCatchingStatus]);
+    }, [gameType]);
 
     // animation floatElement
     useEffect(() => {
@@ -105,7 +112,7 @@ export default function Game() {
         animate();
     }, [gameStarted]);
     useEffect(() => {
-        if (isCatchingStatus) {
+        if (gameType === GAME_MODE_TYPE.CATCHING) {
             Animated.timing(catchingAnim, {
                 toValue: 1,
                 duration: catchingDuration,
@@ -118,7 +125,7 @@ export default function Game() {
             catchingAnim.stopAnimation();
             catchingAnim.setValue(0);
         }
-    }, [isCatchingStatus]);
+    }, [gameType]);
 
     const translateY = anim.interpolate({
         inputRange: [0, Math.PI, 2 * Math.PI],
@@ -168,14 +175,14 @@ export default function Game() {
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
 
-                    {isCatchingStatus && (
+                    {gameType === GAME_MODE_TYPE.CATCHING && (
                         <Animated.View style={{ position: "absolute", bottom: 300, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 30, borderRadius: 100, zIndex: 1000, transform: [{ scale: scaleCatchButton }] }} >
                             <Pressable onPress={startCatching} style={{ padding: 20, borderRadius: 100, backgroundColor: "rgba(255, 0, 0, 0.2)" }}>
                                 <Text style={{}}>Catch!</Text>
                             </Pressable>
                         </Animated.View>
                     )}
-                    {isCatching && (
+                    {gameType === GAME_MODE_TYPE.CATCHING_FISH && (
                         catchingComponent()
                     )}
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
