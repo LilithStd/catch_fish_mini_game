@@ -22,7 +22,9 @@ export default function Game() {
     const getLocationPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
     // state
     const [gameStarted, setGameStarted] = useState(false)
+    const [isCatchingStatus, setIsCatchingStatus] = useState(false)
     const [isCatching, setIsCatching] = useState(false)
+
     // functions
 
     const startGame = () => {
@@ -30,12 +32,13 @@ export default function Game() {
     }
     const stopCatching = () => {
 
-        setIsCatching(false)
+        setIsCatchingStatus(false)
         setGameStarted(false)
         console.log("Game stopped")
     }
     const startCatching = () => {
-        setIsCatching(true)
+        setIsCatchingStatus(true)
+        console.log("Catching started")
     }
     const anim = useRef(new Animated.Value(0)).current;
     // effects
@@ -51,10 +54,10 @@ export default function Game() {
             setTimeout(() => {
                 if (!isMounted) return;
 
-                setIsCatching(true);
+                setIsCatchingStatus(true);
 
                 setTimeout(() => {
-                    setIsCatching(false);
+                    setIsCatchingStatus(false);
                     loop(); // 🔥 запускаем заново
                 }, catchingDuration);
 
@@ -67,15 +70,15 @@ export default function Game() {
         };
     }, [gameStarted]);
     useEffect(() => {
-        if (!isCatching) return;
+        if (!isCatchingStatus) return;
 
         // поклёвка длится ограниченное время
         const timeout = setTimeout(() => {
-            setIsCatching(false);
+            setIsCatchingStatus(false);
         }, catchingDuration);
 
         return () => clearTimeout(timeout);
-    }, [isCatching]);
+    }, [isCatchingStatus]);
     // animation floatElement
     useEffect(() => {
         const animate = () => {
@@ -108,7 +111,7 @@ export default function Game() {
         outputRange: [-10, 10],
     });
 
-    const biteY = isCatching ? 20 : moveY;
+    const biteY = isCatchingStatus ? 20 : moveY;
     // components
     const buttonStartGame = () => {
         return (
@@ -118,20 +121,35 @@ export default function Game() {
             </TouchableOpacity>
         )
     }
+    const catchingComponent = () => {
+        return (
+            <View style={GameStyles.mainContainer}>
+                <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
+                    <Animated.View style={{ transform: [{ translateY: biteY },] }}>
+                        <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
+                    </Animated.View>
+                    <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100, zIndex: 1000 }}>
+                        <Text style={GameStyles.titleText}>Stop Catching</Text>
+                    </Pressable>
+                </ImageBackground>
+            </View>
+        )
+    }
     // 
     const gameComponent = () => {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
-                    <Animated.View style={{ transform: [{ translateY: isCatching ? 20 : moveY },] }}>
+                    <Animated.View style={{ transform: [{ translateY: isCatchingStatus ? 20 : moveY },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
 
-                    {isCatching && (
+                    {isCatchingStatus && (
                         <Pressable onPress={startCatching} style={{ position: "absolute", top: 100, left: 150, width: 100, height: 100, zIndex: 1000 }} >
                             <Text>Catch!</Text>
                         </Pressable>
                     )}
+                    {}
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
                     <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100, zIndex: 1000 }}>
                         <Text style={GameStyles.titleText}>Stop Catching</Text>
