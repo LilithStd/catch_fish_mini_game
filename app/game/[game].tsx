@@ -41,6 +41,7 @@ export default function Game() {
         console.log("Catching started")
     }
     const anim = useRef(new Animated.Value(0)).current;
+    const catchingAnim = useRef(new Animated.Value(0)).current;
     // effects
     // catching animation
     useEffect(() => {
@@ -79,6 +80,7 @@ export default function Game() {
 
         return () => clearTimeout(timeout);
     }, [isCatchingStatus]);
+
     // animation floatElement
     useEffect(() => {
         const animate = () => {
@@ -100,6 +102,21 @@ export default function Game() {
 
         animate();
     }, [gameStarted]);
+    useEffect(() => {
+        if (isCatchingStatus) {
+            Animated.timing(catchingAnim, {
+                toValue: 1,
+                duration: catchingDuration,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }).start(() => {
+                catchingAnim.setValue(0);
+            });
+        } else {
+            catchingAnim.stopAnimation();
+            catchingAnim.setValue(0);
+        }
+    }, [isCatchingStatus]);
 
     const translateY = anim.interpolate({
         inputRange: [0, Math.PI, 2 * Math.PI],
@@ -109,6 +126,11 @@ export default function Game() {
     const moveY = translateY.interpolate({
         inputRange: [0, 1],
         outputRange: [-10, 10],
+    });
+
+    const scaleCatchButton = catchingAnim.interpolate({
+        inputRange: [0, 0.5, 1],
+        outputRange: [1, 1.2, 1],
     });
 
     const biteY = isCatchingStatus ? 20 : moveY;
@@ -145,9 +167,11 @@ export default function Game() {
                     </Animated.View>
 
                     {isCatchingStatus && (
-                        <Pressable onPress={startCatching} style={{ position: "absolute", bottom: 300, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 30, borderRadius: 100, zIndex: 1000 }} >
-                            <Text style={{}}>Catch!</Text>
-                        </Pressable>
+                        <Animated.View style={{ position: "absolute", bottom: 300, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 30, borderRadius: 100, zIndex: 1000, transform: [{ scale: scaleCatchButton }] }} >
+                            <Pressable onPress={startCatching} style={{ padding: 20, borderRadius: 100, backgroundColor: "rgba(255, 0, 0, 0.2)" }}>
+                                <Text style={{}}>Catch!</Text>
+                            </Pressable>
+                        </Animated.View>
                     )}
                     {}
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
