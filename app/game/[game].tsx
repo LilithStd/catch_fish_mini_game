@@ -15,10 +15,12 @@ export default function Game() {
     const placeId = Array.isArray(game) ? game[0] : game;
     // consts
     const catchingDuration = 3000
+    const isCatchingFailed = 'you failed to catch the fish try again'
     const catchingAnimationAmplitude = 10
     const enum GAME_MODE_TYPE {
         CATCHING = "catching",
         FISHING = "fishing",
+        STOPPED = "stopped",
         CATCHING_FISH = "catching_fish"
     }
 
@@ -28,6 +30,7 @@ export default function Game() {
     // state
     const [gameType, setGameType] = useState<GAME_MODE_TYPE>(GAME_MODE_TYPE.FISHING)
     const [gameStarted, setGameStarted] = useState(false)
+    const [isCatchingFailedState, setIsCatchingFailedState] = useState(false)
     const [isCatchingStatus, setIsCatchingStatus] = useState(false)
     const [isCatching, setIsCatching] = useState(false)
 
@@ -41,8 +44,20 @@ export default function Game() {
         setIsCatchingStatus(false)
         setGameStarted(false)
         setIsCatching(false)
+        setGameType(GAME_MODE_TYPE.STOPPED)
         console.log("Game stopped")
     }
+
+    const failedCatching = () => {
+        setIsCatchingFailedState(true)
+        setGameType(GAME_MODE_TYPE.STOPPED)
+        console.log("Catching failed")
+    }
+
+    const resetCatchingFailed = () => {
+        setIsCatchingFailedState(false);
+    }
+
     const startCatching = () => {
         setGameType(GAME_MODE_TYPE.CATCHING_FISH)
         // setIsCatching(true)
@@ -84,10 +99,14 @@ export default function Game() {
 
         // поклёвка длится ограниченное время
         const timeout = setTimeout(() => {
+            setIsCatchingFailedState(true);
             setGameType(GAME_MODE_TYPE.FISHING);
         }, catchingDuration);
 
-        return () => clearTimeout(timeout);
+        return () => {
+            clearTimeout(timeout);
+            setIsCatchingFailedState(false); // сброс состояния при смене gameType
+        };
     }, [gameType]);
 
     // animation floatElement
@@ -174,7 +193,11 @@ export default function Game() {
                     <Animated.View style={{ transform: [{ translateY: isCatchingStatus ? 20 : moveY },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
-
+                    {isCatchingFailedState && (
+                        <View style={{ position: "absolute", bottom: 400, left: 100, backgroundColor: "rgba(255, 0, 0, 0.8)", padding: 20, borderRadius: 10, zIndex: 1000 }}>
+                            <Text style={{ color: "white" }}>{isCatchingFailed}</Text>
+                        </View>
+                    )}
                     {gameType === GAME_MODE_TYPE.CATCHING && (
                         <Animated.View style={{ position: "absolute", bottom: 300, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 30, borderRadius: 100, zIndex: 1000, transform: [{ scale: scaleCatchButton }] }} >
                             <Pressable onPress={startCatching} style={{ padding: 20, borderRadius: 100, backgroundColor: "rgba(255, 0, 0, 0.2)" }}>
