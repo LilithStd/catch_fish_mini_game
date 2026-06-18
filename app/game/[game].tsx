@@ -145,8 +145,8 @@ export default function Game() {
                     </Animated.View>
 
                     {isCatchingStatus && (
-                        <Pressable onPress={startCatching} style={{ position: "absolute", top: 100, left: 150, width: 100, height: 100, zIndex: 1000 }} >
-                            <Text>Catch!</Text>
+                        <Pressable onPress={startCatching} style={{ position: "absolute", bottom: 300, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 30, borderRadius: 100, zIndex: 1000 }} >
+                            <Text style={{}}>Catch!</Text>
                         </Pressable>
                     )}
                     {}
