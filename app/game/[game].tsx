@@ -34,10 +34,12 @@ export default function Game() {
 
         setIsCatchingStatus(false)
         setGameStarted(false)
+        setIsCatching(false)
         console.log("Game stopped")
     }
     const startCatching = () => {
-        setIsCatchingStatus(true)
+        setIsCatching(true)
+        setIsCatchingStatus(false)
         console.log("Catching started")
     }
     const anim = useRef(new Animated.Value(0)).current;
@@ -46,7 +48,7 @@ export default function Game() {
     // catching animation
     useEffect(() => {
         if (!gameStarted) return;
-
+        if (isCatching) return;
         let isMounted = true;
 
         const loop = () => {
@@ -69,7 +71,7 @@ export default function Game() {
         return () => {
             isMounted = false;
         };
-    }, [gameStarted]);
+    }, [gameStarted, isCatching]);
     useEffect(() => {
         if (!isCatchingStatus) return;
 
@@ -173,7 +175,9 @@ export default function Game() {
                             </Pressable>
                         </Animated.View>
                     )}
-                    {}
+                    {isCatching && (
+                        catchingComponent()
+                    )}
                     <Image source={GameImageFull2} style={GameStyles.imageMask} />
                     <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100, zIndex: 1000 }}>
                         <Text style={GameStyles.titleText}>Stop Catching</Text>
