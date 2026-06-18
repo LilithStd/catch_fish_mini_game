@@ -23,7 +23,7 @@ export default function Game() {
         STOPPED = "stopped",
         CATCHING_FISH = "catching_fish"
     }
-
+    
     // stores
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const getLocationPlaceData = useLocationStore((state) => state.getCurrentPlaceData)
@@ -31,8 +31,8 @@ export default function Game() {
     const [gameType, setGameType] = useState<GAME_MODE_TYPE>(GAME_MODE_TYPE.FISHING)
     const [gameStarted, setGameStarted] = useState(false)
     const [isCatchingFailedState, setIsCatchingFailedState] = useState(false)
-    const [isCatchingStatus, setIsCatchingStatus] = useState(false)
-    const [isCatching, setIsCatching] = useState(false)
+
+    console.log(gameType)
 
     // functions
 
@@ -40,10 +40,7 @@ export default function Game() {
         setGameStarted(true)
     }
     const stopCatching = () => {
-
-        setIsCatchingStatus(false)
         setGameStarted(false)
-        setIsCatching(false)
         setGameType(GAME_MODE_TYPE.STOPPED)
         console.log("Game stopped")
     }
@@ -56,12 +53,11 @@ export default function Game() {
 
     const resetCatchingFailed = () => {
         setIsCatchingFailedState(false);
+        setGameType(GAME_MODE_TYPE.FISHING)
     }
 
     const startCatching = () => {
         setGameType(GAME_MODE_TYPE.CATCHING_FISH)
-        // setIsCatching(true)
-        // setIsCatchingStatus(false)
         console.log("Catching started")
     }
     const anim = useRef(new Animated.Value(0)).current;
@@ -69,8 +65,8 @@ export default function Game() {
     // effects
     // catching animation
     useEffect(() => {
-        if (!gameStarted) return;
-        if( gameType === GAME_MODE_TYPE.CATCHING) return;
+        if (!gameStarted || gameType === GAME_MODE_TYPE.STOPPED) return;
+        
         let isMounted = true;
 
         const loop = () => {
@@ -93,19 +89,17 @@ export default function Game() {
         return () => {
             isMounted = false;
         };
-    }, [gameStarted, isCatching]);
+    }, [gameStarted, gameType]);
     useEffect(() => {
         if (gameType !== GAME_MODE_TYPE.CATCHING) return;
 
         // поклёвка длится ограниченное время
         const timeout = setTimeout(() => {
-            setIsCatchingFailedState(true);
-            setGameType(GAME_MODE_TYPE.FISHING);
+            failedCatching();
         }, catchingDuration);
 
         return () => {
             clearTimeout(timeout);
-            setIsCatchingFailedState(false); // сброс состояния при смене gameType
         };
     }, [gameType]);
 
@@ -161,7 +155,7 @@ export default function Game() {
         outputRange: [1, 1.2, 1],
     });
 
-    const biteY = isCatchingStatus ? 20 : moveY;
+    const biteY = gameType === GAME_MODE_TYPE.CATCHING ? 20 : moveY;
     // components
     const buttonStartGame = () => {
         return (
@@ -190,13 +184,18 @@ export default function Game() {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
-                    <Animated.View style={{ transform: [{ translateY: isCatchingStatus ? 20 : moveY },] }}>
+                    <Animated.View style={{ transform: [{ translateY: gameType === GAME_MODE_TYPE.CATCHING ? 20 : moveY },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
                     {isCatchingFailedState && (
                         <View style={{ position: "absolute", bottom: 400, left: 100, backgroundColor: "rgba(255, 0, 0, 0.8)", padding: 20, borderRadius: 10, zIndex: 1000 }}>
                             <Text style={{ color: "white" }}>{isCatchingFailed}</Text>
                         </View>
+                    )}
+                    {isCatchingFailedState && (
+                        <Pressable onPress={resetCatchingFailed} style={{ position: "absolute", bottom: 350, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100, zIndex: 1000 }}>
+                            <Text style={GameStyles.titleText}>Try Again</Text>
+                        </Pressable>
                     )}
                     {gameType === GAME_MODE_TYPE.CATCHING && (
                         <Animated.View style={{ position: "absolute", bottom: 300, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 30, borderRadius: 100, zIndex: 1000, transform: [{ scale: scaleCatchButton }] }} >
