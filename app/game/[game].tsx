@@ -62,7 +62,15 @@ export default function Game() {
     }
     const anim = useRef(new Animated.Value(0)).current;
     const catchingAnim = useRef(new Animated.Value(0)).current;
-    const catchFishAnim = useRef(new Animated.Value(0)).current;    
+    const catchFishAnim = useRef(new Animated.Value(0)).current;
+    //animation components
+    const animatedMoveX = () => {
+     
+    }
+    const animatedMoveY = () => {
+        
+    }
+    //  
     // effects
     // catching animation
     useEffect(() => {
