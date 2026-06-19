@@ -115,7 +115,34 @@ useEffect(() => {
     anim.setValue(0);
     return;
   }
-
+  if(gameType === GAME_MODE_TYPE.CATCHING_FISH) {
+    anim.stopAnimation();
+    anim.setValue(0);
+    const loop = Animated.loop(
+        Animated.sequence([
+          Animated.timing(anim, {
+            toValue: 1,
+            duration: 500,
+            easing: Easing.inOut(Easing.sin),
+            useNativeDriver: true,
+          }),
+          Animated.timing(anim, {
+            toValue: 0,
+            duration: 500,
+            easing: Easing.inOut(Easing.sin),
+            useNativeDriver: true,
+          }),
+        ])
+      );
+  
+      loop.start();
+  
+      return () => {
+        loop.stop();
+        anim.stopAnimation();
+        anim.setValue(0);
+      };
+  }
   const loop = Animated.loop(
     Animated.sequence([
       Animated.timing(anim, {
@@ -176,7 +203,7 @@ useEffect(() => {
                 catchFishAnim.setValue(0);
             });
         }
-    }, [gameType])
+    }, [gameType, catchFishAnim]);
     // 
     const translateY = anim.interpolate({
         inputRange: [0, Math.PI, 2 * Math.PI],
@@ -211,7 +238,7 @@ useEffect(() => {
         return (
             <View style={GameStyles.mainContainer}>
                 <ImageBackground source={GameImageFull} resizeMode="cover" style={GameStyles.imageBackground}>
-                    <Animated.View style={{ transform: [{ translateY: biteY },] }}>
+                    <Animated.View style={{ transform: [{ translateX: catchFishMoveX },] }}>
                         <Image source={FloatItemImage} style={GameStyles.floatItemImage} />
                     </Animated.View>
                     <Pressable onPress={stopCatching} style={{ position: "absolute", bottom: 50, left: 150, backgroundColor: "rgba(255, 255, 255, 0.8)", padding: 10, borderRadius: 100, zIndex: 1000 }}>
