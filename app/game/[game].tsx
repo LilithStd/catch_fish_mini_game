@@ -62,6 +62,7 @@ export default function Game() {
     }
     const anim = useRef(new Animated.Value(0)).current;
     const catchingAnim = useRef(new Animated.Value(0)).current;
+    const catchFishAnim = useRef(new Animated.Value(0)).current;    
     // effects
     // catching animation
     useEffect(() => {
@@ -161,7 +162,22 @@ useEffect(() => {
             catchingAnim.setValue(0);
         }
     }, [gameType]);
-
+    // catching animation
+    useEffect(() => {
+        if(gameType === GAME_MODE_TYPE.CATCHING_FISH) {
+            anim.stopAnimation();
+            anim.setValue(0);
+            Animated.timing(catchFishAnim, {
+                toValue: 1,
+                duration: 2000,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }).start(() => {
+                catchFishAnim.setValue(0);
+            });
+        }
+    }, [gameType])
+    // 
     const translateY = anim.interpolate({
         inputRange: [0, Math.PI, 2 * Math.PI],
         outputRange: [-1, 1, -1], // 🔥 замкнутый цикл
@@ -171,6 +187,10 @@ useEffect(() => {
         inputRange: [0, 1],
         outputRange: [-10, 10],
     });
+    const catchFishMoveX = catchFishAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, -50],
+    })
 
     const scaleCatchButton = catchingAnim.interpolate({
         inputRange: [0, 0.5, 1],
