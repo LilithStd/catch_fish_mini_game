@@ -10,6 +10,7 @@ export default function Encyclopedia() {
         <SafeAreaView style={EncyclopediaStyles.mainContainer}>
             <View style={EncyclopediaStyles.contentContainer}>
                 <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaTitle}</Text>
+                <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaDescription}</Text>
             </View>
         </SafeAreaView>
     )
@@ -25,6 +26,7 @@ export const EncyclopediaStyles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         width: "100%",
-        backgroundColor: "green",
+        padding: 20,
+        backgroundColor: "lime",
     }
 })
