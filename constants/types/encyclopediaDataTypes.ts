@@ -1,7 +1,5 @@
+import { fishListAdaptiveContentType } from "./fishDataTypes"
+
 export type encyclopediaDataTypes = {
-    id: string,
-    title: string,
-    description: string,
-    image: number,
-    preview: number,
+    fish:{en: fishListAdaptiveContentType, lv: fishListAdaptiveContentType, ru: fishListAdaptiveContentType},
 }

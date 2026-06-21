@@ -1,10 +1,11 @@
 import { LanguageEnum } from '@/constants/global/enum'
+import { encyclopediaDataTypes } from '@/constants/types/encyclopediaDataTypes'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface EncyclopediaStoreInterface {
-  encyclopediaData:string[]
+  encyclopediaData:encyclopediaDataTypes[],
   getResponseInformation: (language: LanguageEnum) => void
 }
 
