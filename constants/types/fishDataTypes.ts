@@ -2,6 +2,7 @@ export type fishListAdaptiveContentType = {
     id: string,
     name: string,
     type: string,
-    image: number
-    preview: number
+    image: number,
+    description: string,
+    preview: number,
 }
