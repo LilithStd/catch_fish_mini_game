@@ -1,7 +1,7 @@
 import { encyclopediaAdaptiveContent } from "@/adaptiveContent/encyclopediaAdaptiveContent/encyclopediaAdaptiveContent";
 import { useEncyclopediaStore } from "@/store/encyclopedia/encyclopediaStore";
 import { useGlobalStore } from "@/store/global/globalStore";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -23,6 +23,8 @@ export default function Encyclopedia() {
                         <View style={EncyclopediaStyles.fishItemContainer}>
                             <Text>Name: {item.name}</Text>
                             <Text>Type: {item.type}</Text>
+                            <Text>Description: {item.description}</Text>
+                            <Image source={item.preview} style={{ width: 100, height: 40 }} />
                         </View>
                     )}
                 />
@@ -44,7 +46,7 @@ export const EncyclopediaStyles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
         padding: 20,
-        backgroundColor: "lime",
+        backgroundColor: "grey",
     },
     fishItemContainer: {
         padding: 10,
