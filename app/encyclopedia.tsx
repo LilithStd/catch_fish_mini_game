@@ -35,12 +35,12 @@ export default function Encyclopedia() {
                             <Text>Name: {item.name}</Text>
                             </Pressable>
                             {openElementId?.includes(item.id) && (
-                                <View>
+                                <Pressable onPress={() => toggleElement(item.id)}>
                                     <Text>Type: {item.type}</Text>
                                     <Text>Description: {item.description}</Text>
                                      <Text>Type: {item.type}</Text>
                                     <Image source={item.preview} style={{ width: 100, height: 40 }} />
-                                </View>
+                                </Pressable>
                             )}
                         </View>
                     )}
