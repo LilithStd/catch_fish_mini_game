@@ -9,7 +9,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Encyclopedia() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const encyclopediaData = useEncyclopediaStore((state) => state.encyclopediaData)
-    const [openElementId, setOpenElementId] = useState<string | null>(null)
+    const [openElementId, setOpenElementId] = useState<string[] | null>(null)
+
+    const toggleElement = (elementId: string) => {
+        if (openElementId?.includes(elementId)) {
+            setOpenElementId((prev) => prev?.filter((id) => id !== elementId) || null)
+        } else {
+            setOpenElementId((prev) => (prev ? [...prev, elementId] : [elementId]))
+        }
+    }
 
     return (
         <SafeAreaView style={EncyclopediaStyles.mainContainer}>
@@ -23,10 +31,10 @@ export default function Encyclopedia() {
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={EncyclopediaStyles.fishItemContainer}>
-                            <Pressable onPress={() => setOpenElementId(openElementId === item.id ? null : item.id)}>
+                            <Pressable onPress={() => toggleElement(item.id)}>
                             <Text>Name: {item.name}</Text>
                             </Pressable>
-                            {openElementId === item.id && (
+                            {openElementId?.includes(item.id) && (
                                 <View>
                                     <Text>Type: {item.type}</Text>
                                     <Text>Description: {item.description}</Text>
@@ -52,7 +60,9 @@ export const EncyclopediaStyles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     contentContainer:{
-
+        padding: 20,
+        width: "100%",
+        height: "100%",
         backgroundColor: "grey",
     },
     fishItemContainer: {
