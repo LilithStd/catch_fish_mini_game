@@ -21,7 +21,6 @@ export default function Encyclopedia() {
                 <FlatList
                     data={encyclopediaData.fish[currentLanguage]}
                     keyExtractor={(item) => item.id}
-                    style={EncyclopediaStyles.fishItemContainer}
                     renderItem={({ item }) => (
                         <View style={EncyclopediaStyles.fishItemContainer}>
                             <Pressable onPress={() => setOpenElementId(openElementId === item.id ? null : item.id)}>
@@ -48,19 +47,16 @@ export default function Encyclopedia() {
 export const EncyclopediaStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#fff",
     },
     contentContainer:{
-        flex: 1,
-        alignItems: "center",
-        width: "100%",
-        padding: 20,
+
         backgroundColor: "grey",
     },
     fishItemContainer: {
-        padding: 10,
-            borderBottomWidth: 1,
-            borderBottomColor: "#ccc",
+        borderBottomWidth: 1,
+        borderBottomColor: "#ccc",
     },
 })
