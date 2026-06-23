@@ -1,13 +1,16 @@
 import { encyclopediaAdaptiveContent } from "@/adaptiveContent/encyclopediaAdaptiveContent/encyclopediaAdaptiveContent";
 import { useEncyclopediaStore } from "@/store/encyclopedia/encyclopediaStore";
 import { useGlobalStore } from "@/store/global/globalStore";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function Encyclopedia() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
     const encyclopediaData = useEncyclopediaStore((state) => state.encyclopediaData)
+    const [openElementId, setOpenElementId] = useState<string | null>(null)
+
     return (
         <SafeAreaView style={EncyclopediaStyles.mainContainer}>
             <View style={EncyclopediaStyles.contentContainer}>
@@ -21,10 +24,17 @@ export default function Encyclopedia() {
                     style={EncyclopediaStyles.fishItemContainer}
                     renderItem={({ item }) => (
                         <View style={EncyclopediaStyles.fishItemContainer}>
+                            <Pressable onPress={() => setOpenElementId(openElementId === item.id ? null : item.id)}>
                             <Text>Name: {item.name}</Text>
-                            <Text>Type: {item.type}</Text>
-                            <Text>Description: {item.description}</Text>
-                            <Image source={item.preview} style={{ width: 100, height: 40 }} />
+                            </Pressable>
+                            {openElementId === item.id && (
+                                <View>
+                                    <Text>Type: {item.type}</Text>
+                                    <Text>Description: {item.description}</Text>
+                                     <Text>Type: {item.type}</Text>
+                                    <Image source={item.preview} style={{ width: 100, height: 40 }} />
+                                </View>
+                            )}
                         </View>
                     )}
                 />
