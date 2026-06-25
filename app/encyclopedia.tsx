@@ -40,7 +40,7 @@ export default function Encyclopedia() {
                                     <Text>Type: {item.type}</Text>
                                     <Text>Description: {item.description}</Text>
                                      <Text>Type: {item.type}</Text>
-                                    <Image source={item.image} style={{ width: 360, height: 220}} />
+                                    <Image source={item.image} style={{ width: 360, height: 220}} resizeMode="contain"/>
                                 </Pressable>
                             )}
                         </View>
@@ -62,6 +62,7 @@ export const EncyclopediaStyles = StyleSheet.create({
         padding: 20,
         flex: 1,
         backgroundColor: "grey",
+        paddingBottom: 100,
     },
     fishItemContainer: {
         padding: 10,
