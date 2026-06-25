@@ -30,36 +30,36 @@ const fishIds = {
 
 const fishImages = {
     pike:{
-        image: require("@/assets/images/fish/Pike.jpg"),
-        preview: require("@/assets/images/fish/pikeWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/pike.png"),
+        preview: require("@/assets/images/fish/preview/pikeWithoutBGPreview.png")
     },
     perch: {
-        image: require("@/assets/images/fish/Perch.jpg"),
-        preview: require("@/assets/images/fish/perchWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/perch.png"),
+        preview: require("@/assets/images/fish/preview/perchWithoutBGPreview.png")
     },
     pikeperch: {
-        image: require("@/assets/images/fish/Pikeperch.jpg"),
-        preview: require("@/assets/images/fish/pikePerchWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/pikeperch.png"),
+        preview: require("@/assets/images/fish/preview/pikeperchWithoutBGPreview.png")
     },
     salmon: {
-        image: require("@/assets/images/fish/Salmon.jpg"),
-        preview: require("@/assets/images/fish/salmonWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/salmon.png"),
+        preview: require("@/assets/images/fish/preview/salmonWithoutBGPreview.png")
     },
     roach: {
-        image: require("@/assets/images/fish/Roach.jpg"),
-        preview: require("@/assets/images/fish/roachWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/roach.png"),
+        preview: require("@/assets/images/fish/preview/roachWithoutBGPreview.png")
     },
     carp: {
-        image: require("@/assets/images/fish/Carp.jpg"),
-        preview: require("@/assets/images/fish/carpWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/carp.png"),
+        preview: require("@/assets/images/fish/preview/carpWithoutBGPreview.png")
     },
     trout: {
-        image: require("@/assets/images/fish/Trout.jpg"),
-        preview: require("@/assets/images/fish/troutWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/trout.png"),
+        preview: require("@/assets/images/fish/preview/troutWithoutBGPreview.png")
     },
     bream: {
-        image: require("@/assets/images/fish/Bream.jpg"),
-        preview: require("@/assets/images/fish/breamWithoutBGPreview.png")
+        image: require("@/assets/images/fish/full/bream.png"),
+        preview: require("@/assets/images/fish/preview/breamWithoutBGPreview.png")
     },
 }
 
