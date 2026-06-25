@@ -29,6 +29,7 @@ export default function Encyclopedia() {
                 <FlatList
                     data={encyclopediaData.fish[currentLanguage]}
                     keyExtractor={(item) => item.id}
+                    style={{}}
                     renderItem={({ item }) => (
                         <View style={EncyclopediaStyles.fishItemContainer}>
                             <Pressable onPress={() => toggleElement(item.id)}>
@@ -39,7 +40,7 @@ export default function Encyclopedia() {
                                     <Text>Type: {item.type}</Text>
                                     <Text>Description: {item.description}</Text>
                                      <Text>Type: {item.type}</Text>
-                                    <Image source={item.preview} style={{ width: 100, height: 40 }} />
+                                    <Image source={item.image} style={{ width: 360, height: 220}} />
                                 </Pressable>
                             )}
                         </View>
@@ -55,18 +56,20 @@ export default function Encyclopedia() {
 export const EncyclopediaStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        width: "100%",
-        height: "100%",
         backgroundColor: "#fff",
     },
     contentContainer:{
         padding: 20,
-        width: "100%",
-        height: "100%",
+        flex: 1,
         backgroundColor: "grey",
     },
     fishItemContainer: {
-        borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: "#f0f0f0",
+        borderWidth: 1,
+        borderColor: "#ccc",
+        marginBottom: 10,
+        marginTop: 10,
     },
 })
