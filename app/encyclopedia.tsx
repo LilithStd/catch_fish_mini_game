@@ -1,6 +1,7 @@
 import { encyclopediaAdaptiveContent } from "@/adaptiveContent/encyclopediaAdaptiveContent/encyclopediaAdaptiveContent";
 import { useEncyclopediaStore } from "@/store/encyclopedia/encyclopediaStore";
 import { useGlobalStore } from "@/store/global/globalStore";
+import { BlurView } from 'expo-blur';
 import { useState } from "react";
 import { FlatList, Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,7 +22,7 @@ export default function Encyclopedia() {
 
     return (
         <SafeAreaView style={EncyclopediaStyles.mainContainer}>
-            <ImageBackground source={backgroundEncyclopediaImage} blurRadius={3} style={EncyclopediaStyles.imageBackground} resizeMode="cover">
+            <ImageBackground source={backgroundEncyclopediaImage} blurRadius={0} style={EncyclopediaStyles.imageBackground} resizeMode="cover">
                 <View style={EncyclopediaStyles.contentContainer}>
                     <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaTitle}</Text>
                     <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaDescription}</Text>
@@ -33,17 +34,28 @@ export default function Encyclopedia() {
                         style={{}}
                         renderItem={({ item }) => (
                             <View style={[EncyclopediaStyles.fishItemContainer, openElementId?.includes(item.id) && EncyclopediaStyles.fishItemActive]}>
-                                <Pressable onPress={() => toggleElement(item.id)}>
-                                <Text>Name: {item.name}</Text>
-                                </Pressable>
-                                {openElementId?.includes(item.id) && (
+                                <BlurView
+                                        intensity={50}
+                                     
+                                          style={{
+                                            padding:5
+                                        }}
+
+                                    >
                                     <Pressable onPress={() => toggleElement(item.id)}>
-                                        <Text>Type: {item.type}</Text>
-                                        <Text>Description: {item.description}</Text>
-                                        <Text>Type: {item.type}</Text>
-                                        <Image source={item.image} style={{ width: 340, height: 220, }} resizeMode="contain"/>
+                                    <Text>Name: {item.name}</Text>
                                     </Pressable>
-                                )}
+                                    {openElementId?.includes(item.id) && (
+                                        <Pressable onPress={() => toggleElement(item.id)}>
+                                            <Text>Type: {item.type}</Text>
+                                            <Text>Description: {item.description}</Text>
+                                            <Text>Type: {item.type}</Text>
+                                            <Image source={item.image} style={{ width: 340, height: 220, }} resizeMode="contain"/>
+                                        </Pressable>
+                                    )}
+                                  
+                                        
+                                    </BlurView>
                             </View>
                         )}
                     />
