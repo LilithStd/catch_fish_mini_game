@@ -4,7 +4,7 @@ import { useGlobalStore } from "@/store/global/globalStore";
 import { useState } from "react";
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+// const backgroundEncyclopediaImage = require("@/assets/images/");
 
 export default function Encyclopedia() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
