@@ -32,7 +32,7 @@ export default function Encyclopedia() {
                         keyExtractor={(item) => item.id}
                         style={{}}
                         renderItem={({ item }) => (
-                            <View style={EncyclopediaStyles.fishItemContainer}>
+                            <View style={[EncyclopediaStyles.fishItemContainer, openElementId?.includes(item.id) && EncyclopediaStyles.fishItemActive]}>
                                 <Pressable onPress={() => toggleElement(item.id)}>
                                 <Text>Name: {item.name}</Text>
                                 </Pressable>
@@ -41,7 +41,7 @@ export default function Encyclopedia() {
                                         <Text>Type: {item.type}</Text>
                                         <Text>Description: {item.description}</Text>
                                         <Text>Type: {item.type}</Text>
-                                        <Image source={item.image} style={{ width: 360, height: 220}} resizeMode="contain"/>
+                                        <Image source={item.image} style={{ width: 340, height: 220, }} resizeMode="contain"/>
                                     </Pressable>
                                 )}
                             </View>
@@ -62,9 +62,9 @@ export const EncyclopediaStyles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     contentContainer:{
-        padding: 20,
+        
         flex: 1,
-        backgroundColor: "grey",
+        backgroundColor: "transparent",
         paddingBottom: 100,
     },
     imageBackground: {
@@ -76,10 +76,13 @@ export const EncyclopediaStyles = StyleSheet.create({
     fishItemContainer: {
         padding: 10,
         borderRadius: 10,
-        backgroundColor: "#f0f0f0",
+        backgroundColor: "rgba(255, 255, 255, 0.21)",
         borderWidth: 1,
         borderColor: "#ccc",
         marginBottom: 10,
         marginTop: 10,
     },
+    fishItemActive:{
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+    }
 })
