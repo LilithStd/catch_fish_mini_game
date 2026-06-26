@@ -2,9 +2,9 @@ import { encyclopediaAdaptiveContent } from "@/adaptiveContent/encyclopediaAdapt
 import { useEncyclopediaStore } from "@/store/encyclopedia/encyclopediaStore";
 import { useGlobalStore } from "@/store/global/globalStore";
 import { useState } from "react";
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-// const backgroundEncyclopediaImage = require("@/assets/images/");
+const backgroundEncyclopediaImage = require("@/assets/images/encyclopedia/full/underwater_fish.jpg");
 
 export default function Encyclopedia() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
@@ -21,33 +21,36 @@ export default function Encyclopedia() {
 
     return (
         <SafeAreaView style={EncyclopediaStyles.mainContainer}>
-            <View style={EncyclopediaStyles.contentContainer}>
-                <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaTitle}</Text>
-                <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaDescription}</Text>
-                <View>
-                <Text>Fish List:</Text>
-                <FlatList
-                    data={encyclopediaData.fish[currentLanguage]}
-                    keyExtractor={(item) => item.id}
-                    style={{}}
-                    renderItem={({ item }) => (
-                        <View style={EncyclopediaStyles.fishItemContainer}>
-                            <Pressable onPress={() => toggleElement(item.id)}>
-                            <Text>Name: {item.name}</Text>
-                            </Pressable>
-                            {openElementId?.includes(item.id) && (
+            <ImageBackground source={backgroundEncyclopediaImage} blurRadius={3} style={EncyclopediaStyles.imageBackground} resizeMode="cover">
+                <View style={EncyclopediaStyles.contentContainer}>
+                    <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaTitle}</Text>
+                    <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaDescription}</Text>
+                    <View>
+                    <Text>Fish List:</Text>
+                    <FlatList
+                        data={encyclopediaData.fish[currentLanguage]}
+                        keyExtractor={(item) => item.id}
+                        style={{}}
+                        renderItem={({ item }) => (
+                            <View style={EncyclopediaStyles.fishItemContainer}>
                                 <Pressable onPress={() => toggleElement(item.id)}>
-                                    <Text>Type: {item.type}</Text>
-                                    <Text>Description: {item.description}</Text>
-                                     <Text>Type: {item.type}</Text>
-                                    <Image source={item.image} style={{ width: 360, height: 220}} resizeMode="contain"/>
+                                <Text>Name: {item.name}</Text>
                                 </Pressable>
-                            )}
-                        </View>
-                    )}
-                />
-            </View>
-            </View>
+                                {openElementId?.includes(item.id) && (
+                                    <Pressable onPress={() => toggleElement(item.id)}>
+                                        <Text>Type: {item.type}</Text>
+                                        <Text>Description: {item.description}</Text>
+                                        <Text>Type: {item.type}</Text>
+                                        <Image source={item.image} style={{ width: 360, height: 220}} resizeMode="contain"/>
+                                    </Pressable>
+                                )}
+                            </View>
+                        )}
+                    />
+                </View>
+                </View>
+            </ImageBackground>
+            
             
         </SafeAreaView>
     )
@@ -63,6 +66,12 @@ export const EncyclopediaStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: "grey",
         paddingBottom: 100,
+    },
+    imageBackground: {
+        flex: 1,
+        justifyContent: 'center',
+        borderRadius: 50,
+        padding: 30,
     },
     fishItemContainer: {
         padding: 10,
