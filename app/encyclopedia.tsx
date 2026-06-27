@@ -1,7 +1,7 @@
 import { encyclopediaAdaptiveContent } from "@/adaptiveContent/encyclopediaAdaptiveContent/encyclopediaAdaptiveContent";
 import { useEncyclopediaStore } from "@/store/encyclopedia/encyclopediaStore";
 import { useGlobalStore } from "@/store/global/globalStore";
-import { BlurView } from 'expo-blur';
+
 import { useState } from "react";
 import { FlatList, Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -34,14 +34,7 @@ export default function Encyclopedia() {
                         style={{}}
                         renderItem={({ item }) => (
                             <View style={[EncyclopediaStyles.fishItemContainer, openElementId?.includes(item.id) && EncyclopediaStyles.fishItemActive]}>
-                                <BlurView
-                                        intensity={50}
-                                     
-                                          style={{
-                                            padding:5
-                                        }}
-
-                                    >
+            
                                     <Pressable onPress={() => toggleElement(item.id)}>
                                     <Text>Name: {item.name}</Text>
                                     </Pressable>
@@ -55,7 +48,7 @@ export default function Encyclopedia() {
                                     )}
                                   
                                         
-                                    </BlurView>
+                                    
                             </View>
                         )}
                     />
@@ -71,12 +64,12 @@ export default function Encyclopedia() {
 export const EncyclopediaStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: "#fff",
+        // backgroundColor: "#fff",
     },
     contentContainer:{
         
         flex: 1,
-        backgroundColor: "transparent",
+        // backgroundColor: "transparent",
         paddingBottom: 100,
     },
     imageBackground: {
@@ -88,13 +81,13 @@ export const EncyclopediaStyles = StyleSheet.create({
     fishItemContainer: {
         padding: 10,
         borderRadius: 10,
-        backgroundColor: "rgba(255, 255, 255, 0.21)",
+        // backgroundColor: "rgba(255, 255, 255, 0.21)",
         borderWidth: 1,
         borderColor: "#ccc",
         marginBottom: 10,
         marginTop: 10,
     },
     fishItemActive:{
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
+        // backgroundColor: "rgba(255, 255, 255, 0.5)",
     }
 })
