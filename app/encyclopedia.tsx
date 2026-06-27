@@ -22,7 +22,7 @@ export default function Encyclopedia() {
 
     return (
         <SafeAreaView style={EncyclopediaStyles.mainContainer}>
-            <ImageBackground source={backgroundEncyclopediaImage} blurRadius={0} style={EncyclopediaStyles.imageBackground} resizeMode="cover">
+            <ImageBackground source={backgroundEncyclopediaImage} blurRadius={openElementId?.length ? 5 : 0} style={EncyclopediaStyles.imageBackground} resizeMode="cover">
                 <View style={EncyclopediaStyles.contentContainer}>
                     <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaTitle}</Text>
                     <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaDescription}</Text>
@@ -42,7 +42,6 @@ export default function Encyclopedia() {
                                         <Pressable onPress={() => toggleElement(item.id)}>
                                             <Text>Type: {item.type}</Text>
                                             <Text>Description: {item.description}</Text>
-                                            <Text>Type: {item.type}</Text>
                                             <Image source={item.image} style={{ width: 340, height: 220, }} resizeMode="contain"/>
                                         </Pressable>
                                     )}
@@ -64,30 +63,30 @@ export default function Encyclopedia() {
 export const EncyclopediaStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        // backgroundColor: "#fff",
     },
     contentContainer:{
-        
         flex: 1,
-        // backgroundColor: "transparent",
         paddingBottom: 100,
     },
     imageBackground: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 50,
-        padding: 30,
+        padding: 10,
     },
     fishItemContainer: {
-        padding: 10,
         borderRadius: 10,
-        // backgroundColor: "rgba(255, 255, 255, 0.21)",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
         borderWidth: 1,
         borderColor: "#ccc",
         marginBottom: 10,
         marginTop: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 10,
     },
     fishItemActive:{
-        // backgroundColor: "rgba(255, 255, 255, 0.5)",
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
     }
 })
