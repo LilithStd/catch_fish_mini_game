@@ -9,9 +9,10 @@ const backgroundEncyclopediaImage = require("@/assets/images/encyclopedia/full/u
 
 export default function Encyclopedia() {
     const currentLanguage = useGlobalStore((state) => state.currentLanguage)
-    const encyclopediaData = useEncyclopediaStore((state) => state.encyclopediaData)
+    const encyclopediaData = useEncyclopediaStore((state) => state.getResponseInformation)
+    const encyclopediaFishDataAdaptiveContent = encyclopediaData(currentLanguage)
     const [openElementId, setOpenElementId] = useState<string[] | null>(null)
-
+    
     const toggleElement = (elementId: string) => {
         if (openElementId?.includes(elementId)) {
             setOpenElementId((prev) => prev?.filter((id) => id !== elementId) || null)
@@ -29,7 +30,7 @@ export default function Encyclopedia() {
                     <View>
                     <Text>Fish List:</Text>
                     <FlatList
-                        data={encyclopediaData.fish[currentLanguage]}
+                        data={encyclopediaFishDataAdaptiveContent}
                         keyExtractor={(item) => item.id}
                         style={{}}
                         renderItem={({ item }) => (
