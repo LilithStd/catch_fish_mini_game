@@ -17,7 +17,7 @@ export const useEncyclopediaStore = create<EncyclopediaStoreInterface>()(
           fish: fishContent
         },  
         getResponseInformation: (language: LanguageEnum) => {
-        // Implement your logic to get response information based on the language
+        return get().encyclopediaData.fish[language]
       },
       }),
     {
