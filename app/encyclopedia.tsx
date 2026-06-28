@@ -28,7 +28,7 @@ export default function Encyclopedia() {
                     <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaTitle}</Text>
                     <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaDescription}</Text>
                     <View>
-                    <Text>Fish List:</Text>
+                    <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaUI.fishListTitle}:</Text>
                     <FlatList
                         data={encyclopediaFishDataAdaptiveContent}
                         keyExtractor={(item) => item.id}
@@ -37,12 +37,12 @@ export default function Encyclopedia() {
                             <View style={[EncyclopediaStyles.fishItemContainer, openElementId?.includes(item.id) && EncyclopediaStyles.fishItemActive]}>
             
                                     <Pressable onPress={() => toggleElement(item.id)}>
-                                    <Text>Name: {item.name}</Text>
+                                    <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaUI.fishName}: {item.name}</Text>
                                     </Pressable>
                                     {openElementId?.includes(item.id) && (
                                         <Pressable onPress={() => toggleElement(item.id)}>
-                                            <Text>Type: {item.type}</Text>
-                                            <Text>Description: {item.description}</Text>
+                                            <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaUI.fishType}: {item.type}</Text>
+                                            <Text>{encyclopediaAdaptiveContent[currentLanguage].encyclopediaUI.fishDescription}: {item.description}</Text>
                                             <Image source={item.image} style={{ width: 340, height: 220, }} resizeMode="contain"/>
                                         </Pressable>
                                     )}
